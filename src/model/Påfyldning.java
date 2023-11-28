@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 public class Påfyldning {
     private Destillat destillat;
-    private Fad fad;
     private LocalDate startDato;
     private String medarbejder;
     private double antalLiter;
@@ -13,7 +12,6 @@ public class Påfyldning {
 
     public Påfyldning(Destillat destillat, Fad fad, LocalDate startDato, String medarbejder, double antalLiter, double alkoholProcent, LocalDate slutDato) {
         this.destillat = destillat;
-        this.fad = fad;
         this.startDato = startDato;
         this.medarbejder = medarbejder;
         this.antalLiter = antalLiter;
@@ -28,12 +26,6 @@ public class Påfyldning {
     }
     public void setDestillat(Destillat destillat) {
         this.destillat = destillat;
-    }
-    public Fad getFad() {
-        return fad;
-    }
-    public void setFad(Fad fad) {
-        this.fad = fad;
     }
     public LocalDate getStartDato() {
         return startDato;
