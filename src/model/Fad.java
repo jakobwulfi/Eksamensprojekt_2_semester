@@ -23,7 +23,11 @@ public class Fad {
     }
     // metoder
     public void updateVolumen(double volumen) {
-        this.NuværendeMængdeLiter += volumen;
+        if (volumen + NuværendeMængdeLiter > fadStørrelse) {
+            throw new IllegalArgumentException("Mængden er større end fad størrelse");
+        } else {
+            this.NuværendeMængdeLiter += volumen;
+        }
     }
 
     // get og set
