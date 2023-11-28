@@ -6,7 +6,7 @@ public class Påfyldning {
     private Destillat destillat;
     private LocalDate startDato;
     private String medarbejder;
-    private double antalLiter;
+    private double mængdeLiter;
     private double alkoholProcent;
     private LocalDate slutDato;
 
@@ -14,7 +14,7 @@ public class Påfyldning {
         this.destillat = destillat;
         this.startDato = startDato;
         this.medarbejder = medarbejder;
-        this.antalLiter = antalLiter;
+        this.mængdeLiter = antalLiter;
         this.alkoholProcent = alkoholProcent;
         this.slutDato = slutDato;
     }
@@ -39,11 +39,11 @@ public class Påfyldning {
     public void setMedarbejder(String medarbejder) {
         this.medarbejder = medarbejder;
     }
-    public double getAntalLiter() {
-        return antalLiter;
+    public double getMængdeLiter() {
+        return mængdeLiter;
     }
-    public void setAntalLiter(double antalLiter) {
-        this.antalLiter = antalLiter;
+    public void setMængdeLiter(double mængdeLiter) {
+        this.mængdeLiter = mængdeLiter;
     }
     public double getAlkoholProcent() {
         return alkoholProcent;

@@ -11,7 +11,7 @@ public class Fad {
     private double fadStørrelse;
     private int rækkeNr;
     private int hylde;
-    private double nuværendeVolumen = 0;
+    private double NuværendeMængdeLiter = 0;
     private List<Påfyldning> påfyldninger = new ArrayList<>();
 
     public Fad(String fadFra, String fadType, int fillNr, int fadNr, double fadStørrelse) {
@@ -23,7 +23,7 @@ public class Fad {
     }
     // metoder
     public void updateVolumen(double volumen) {
-        this.nuværendeVolumen += volumen;
+        this.NuværendeMængdeLiter += volumen;
     }
 
     // get og set
@@ -59,5 +59,8 @@ public class Fad {
     }
     public List<Påfyldning> getPåfyldninger() {
         return påfyldninger;
+    }
+    public double getNuværendeMængdeLiter() {
+        return NuværendeMængdeLiter;
     }
 }
