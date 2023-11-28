@@ -18,9 +18,44 @@ public class Fad {
         this.fadNr = fadNr;
         this.fadStørrelse = fadStørrelse;
     }
-
+    // metoder
     public double udregnVolumen() {
-        //TODO
+
         return 0;
+    }
+
+    // get og set
+    public String getFadFra() {
+        return fadFra;
+    }
+    public void setFadFra(String fadFra) {
+        this.fadFra = fadFra;
+    }
+    public String getFadType() {
+        return fadType;
+    }
+    public void setFadType(String fadType) {
+        this.fadType = fadType;
+    }
+    public int getFillNr() {
+        return fillNr;
+    }
+    public void setFillNr(int fillNr) {
+        this.fillNr = fillNr;
+    }
+    public int getFadNr() {
+        return fadNr;
+    }
+    public void setFadNr(int fadNr) {
+        this.fadNr = fadNr;
+    }
+    public double getFadStørrelse() {
+        return fadStørrelse;
+    }
+    public void setFadStørrelse(double fadStørrelse) {
+        this.fadStørrelse = fadStørrelse;
+    }
+    public List<Påfyldning> getPåfyldninger() {
+        return påfyldninger;
     }
 }

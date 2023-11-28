@@ -13,4 +13,28 @@ public class Whisky {
         this.whiskyType = whiskyType;
         this.nummer = nummer;
     }
+    // metoder
+
+    // get og set
+    public String getWhiskyType() {
+        return whiskyType;
+    }
+    public void setWhiskyType(String whiskyType) {
+        this.whiskyType = whiskyType;
+    }
+    public int getNummer() {
+        return nummer;
+    }
+    public void setNummer(int nummer) {
+        this.nummer = nummer;
+    }
+    public List<Destillat> getDestillater() {
+        return destillater;
+    }
+    public void setDestillater(List<Destillat> destillater) {
+        this.destillater = destillater;
+    }
+    public List<Fad> getFade() {
+        return fade;
+    }
 }

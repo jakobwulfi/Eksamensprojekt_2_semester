@@ -18,12 +18,46 @@ public class Lager {
         this.kapacitet = kapacitet;
         this.navn = navn;
     }
-
-
+    // metoder
     /**
      * Tilføjer et fad til lager
      */
     private void addFad(Fad fad) {
         fade.add(fad);
+    }
+
+    // get og set
+    public int getRækker() {
+        return rækker;
+    }
+    public void setRækker(int rækker) {
+        this.rækker = rækker;
+    }
+    public int getHylder() {
+        return hylder;
+    }
+    public void setHylder(int hylder) {
+        this.hylder = hylder;
+    }
+    public String getAdresse() {
+        return adresse;
+    }
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+    public int getKapacitet() {
+        return kapacitet;
+    }
+    public void setKapacitet(int kapacitet) {
+        this.kapacitet = kapacitet;
+    }
+    public String getNavn() {
+        return navn;
+    }
+    public void setNavn(String navn) {
+        this.navn = navn;
+    }
+    public List<Fad> getFade() {
+        return fade;
     }
 }
