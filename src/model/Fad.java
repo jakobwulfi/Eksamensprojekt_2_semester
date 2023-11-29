@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fad {
+public class Fad implements Serializable {
     private String fadFra;
     private String fadType;
     private int fillNr;
