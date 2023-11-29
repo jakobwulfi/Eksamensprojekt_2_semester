@@ -11,9 +11,9 @@ public abstract class Controller {
         Controller.storage = storage;
     }
     // Controller metoder for destillat
-    public static Destillat opretDestillat(String maltBatch, String kornsort, String medarbejder, double mængdeLiter, double alkoholProcent,
+    public static Destillat opretDestillat(String maltBatch, String kornsort, String medarbejder,  double alkoholProcent,
     String rygeMateriale, String kommentar, String newMakeNr, LocalDate startDato, LocalDate slutDato, double startVolume) {
-    Destillat d = new Destillat(maltBatch, kornsort, medarbejder, mængdeLiter, alkoholProcent, rygeMateriale, kommentar, newMakeNr,
+    Destillat d = new Destillat(maltBatch, kornsort, medarbejder, alkoholProcent, rygeMateriale, kommentar, newMakeNr,
             startDato, slutDato, startVolume);
     storage.storeDestillat(d);
     return d;

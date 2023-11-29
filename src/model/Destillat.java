@@ -16,12 +16,11 @@ public class Destillat implements Serializable {
     private LocalDate slutDato;
     private double startVolume;
 
-    public Destillat(String maltBatch, String kornsort, String medarbejder, double mængdeLiter, double alkoholProcent,
+    public Destillat(String maltBatch, String kornsort, String medarbejder, double alkoholProcent,
         String rygeMateriale, String kommentar, String newMakeNr, LocalDate startDato, LocalDate slutDato, double startVolume) {
         this.maltBatch = maltBatch;
         this.kornsort = kornsort;
         this.medarbejder = medarbejder;
-        this.mængdeLiter = mængdeLiter;
         this.alkoholProcent = alkoholProcent;
         this.rygeMateriale = rygeMateriale;
         this.kommentar = kommentar;
@@ -29,6 +28,7 @@ public class Destillat implements Serializable {
         this.startDato = startDato;
         this.slutDato = slutDato;
         this.startVolume = startVolume;
+        this.mængdeLiter = startVolume;
     }
     // metoder
 

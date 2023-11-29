@@ -1,4 +1,5 @@
 package gui;
+import controller.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +10,9 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+
+import java.time.LocalDate;
+
 public class MainGuiController {
     @FXML
     private Button btnOpretDestillat;
@@ -252,6 +256,10 @@ public class MainGuiController {
 
     @FXML
     void opretDestillatAction(ActionEvent event) {
+        Controller.opretDestillat(txfMaltBatch.getText(),txfKornsort.getText(),txfMedarbejder.getText(),
+                Double.valueOf(txfAlkoholProcent.getText()), txfRygeMateriale.getText(),txfKommentar.getText(),
+                txfNewMakeNr.getText(), LocalDate.parse(txfStartDato.getText()),LocalDate.parse(txfSlutDato.getText()),
+                Double.valueOf(txfStartVolume.getText()));
 
     }
 
