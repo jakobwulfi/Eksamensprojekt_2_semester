@@ -15,10 +15,10 @@ public class Fad implements Serializable {
     private double NuværendeMængdeLiter = 0;
     private List<Påfyldning> påfyldninger = new ArrayList<>();
 
-    public Fad(String fadFra, String fadType, int fillNr, int fadNr, double fadStørrelse) {
+    public Fad(String fadFra, String fadType, int fadNr, double fadStørrelse) {
         this.fadFra = fadFra;
         this.fadType = fadType;
-        this.fillNr = fillNr;
+        this.fillNr = 1;
         this.fadNr = fadNr;
         this.fadStørrelse = fadStørrelse;
     }

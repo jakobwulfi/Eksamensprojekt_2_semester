@@ -13,9 +13,9 @@ class LagerTest {
     void addFad() {
         List<Fad> fade = new ArrayList<>();
 
-        Fad et = new Fad("Italien", "Bourbon", 1, 1, 80.00);
-        Fad to = new Fad("Frankrig", "Sherry", 3, 2, 135.00);
-        Fad tre = new Fad("Polen", "Vin", 2, 3, 100.00);
+        Fad et = new Fad("Italien", "Bourbon", 1, 80.00);
+        Fad to = new Fad("Frankrig", "Sherry", 2, 135.00);
+        Fad tre = new Fad("Polen", "Vin", 3, 100.00);
 
         //Arrange
         fade.add(et);

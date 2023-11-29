@@ -8,8 +8,8 @@ class FadTest {
 
     @Test
     void updateVolumen() {
-        Fad et = new Fad("Italien", "Bourbon", 1, 1, 80.00);
-        Fad to = new Fad("Frankrig", "Sherry", 3, 2, 135.00);
+        Fad et = new Fad("Italien", "Bourbon", 1, 80.00);
+        Fad to = new Fad("Frankrig", "Sherry", 2, 135.00);
 
         //Arrange
         et.updateVolumen(50);
