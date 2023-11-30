@@ -18,9 +18,9 @@
                <children>
                   <ListView fx:id="lvwFade" layoutX="59.0" layoutY="28.0" prefHeight="184.0" prefWidth="226.0" />
                   <Button fx:id="btnOpretFad" layoutX="372.0" layoutY="212.0" mnemonicParsing="false" onAction="#opretFadAction" text="Opret Fad" />
-                  <TextField fx:id="txfFadOprindelse" layoutX="388.0" layoutY="30.0" />
-                  <TextField fx:id="txfFadType" layoutX="388.0" layoutY="72.0" />
-                  <TextField fx:id="txfFadNr" layoutX="388.0" layoutY="114.0" />
+                  <TextField fx:id="txfFadOprindelse" layoutX="388.0" layoutY="30.0" promptText="Frankrig" />
+                  <TextField fx:id="txfFadType" layoutX="388.0" layoutY="72.0" promptText="Sherry" />
+                  <TextField fx:id="txfFadNr" layoutX="388.0" layoutY="114.0" promptText="42" />
                   <Label fx:id="lblFadOprindelse" layoutX="298.0" layoutY="34.0" text="Fad oprindelse:" />
                   <Label fx:id="lblFadType" layoutX="300.0" layoutY="76.0" text="Fad Type:" />
                   <Label fx:id="lblFadNr" layoutX="298.0" layoutY="118.0" text="Fad Nr:" />
@@ -28,7 +28,7 @@
                   <Label fx:id="lblInfoFad" layoutX="18.0" layoutY="272.0" text="Info" />
                   <TextArea fx:id="txaInfoFad" layoutX="59.0" layoutY="272.0" prefHeight="200.0" prefWidth="226.0" />
                   <Label fx:id="lblFadStørrelse" layoutX="298.0" layoutY="156.0" text="Fad Størrelse:" />
-                  <TextField fx:id="txfFadStørrelse" layoutX="388.0" layoutY="152.0" />
+                  <TextField fx:id="txfFadStørrelse" layoutX="388.0" layoutY="152.0" promptText="90" />
                </children></AnchorPane>
       </content>
     </Tab>
