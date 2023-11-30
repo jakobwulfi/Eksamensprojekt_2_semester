@@ -312,7 +312,18 @@ public class MainGuiController {
 
     @FXML
     void opretFadAction(ActionEvent event) {
+        try {
+            int fadNr = Integer.valueOf(txfFadNr.getText());
+            double fadStørrelse = Double.valueOf(txfFadStørrelse.getText());
+            Controller.opretFad(txfFadOprindelse.getText(),txfFadType.getText(),fadNr,fadStørrelse);
 
+        } catch(NumberFormatException ex){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Format Error");
+            alert.setHeaderText("Fejl i Fad nr eller størrelse");
+            alert.show();
+        }
     }
 
     @FXML

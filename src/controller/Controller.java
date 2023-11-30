@@ -20,7 +20,7 @@ public abstract class Controller {
     }
 
     // Controller metoder for fad
-    public static Fad opretFad(String fadFra, String fadType, int fillNr, int fadNr, double fadStørrelse) {
+    public static Fad opretFad(String fadFra, String fadType, int fadNr, double fadStørrelse) {
         Fad f = new Fad(fadFra, fadType,  fadNr, fadStørrelse);
         storage.storeFad(f);
         return f;
