@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListStorage implements Storage {
-    private static final ArrayList<Destillat> destillater = new ArrayList<>();
-    private static final ArrayList<Fad> fade = new ArrayList<>();
+    private final ArrayList<Destillat> destillater = new ArrayList<>();
+    private final ArrayList<Fad> fade = new ArrayList<>();
     //---------------------------------------------------------------------
 
     public List<Destillat> getDestillater() {
