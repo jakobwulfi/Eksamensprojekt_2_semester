@@ -8,11 +8,11 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListStorage implements Storage, Serializable {
-    private final ArrayList<Destillat> destillater = new ArrayList<>();
-    private final ArrayList<Fad> fade = new ArrayList<>();
+public class ListStorage implements Storage {
+    private static final ArrayList<Destillat> destillater = new ArrayList<>();
+    private static final ArrayList<Fad> fade = new ArrayList<>();
     //---------------------------------------------------------------------
-    // Storage metoder for destillater
+
     public List<Destillat> getDestillater() {
         return new ArrayList<>(destillater);
     }
@@ -20,14 +20,16 @@ public class ListStorage implements Storage, Serializable {
         destillater.add(d);
     }
 
-    // Storage metoder for fade
-    public List<Fad> getFade(Fad f) {
+    //---------------------------------------------------------------------
+
+    public List<Fad> getFade(){
         return new ArrayList<>(fade);
     }
     public void storeFad(Fad f) {
         fade.add(f);
     }
 
+    //---------------------------------------------------------------------
 
 
     // load og save metoder
