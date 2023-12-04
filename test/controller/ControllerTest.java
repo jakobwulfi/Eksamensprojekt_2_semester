@@ -48,7 +48,7 @@ class ControllerTest {
     }
     //-------------------------------------------------
     @Test
-    void opretPåfyldning() {
+    void beregnProcentAlkohol() {
         Fad f = Controller.opretFad("Frankrig", "Sherry", 1, 100);
         Destillat nm1 = Controller.opretDestillat("Blended", "Bygsort", "Lars", 40, null, "Nice", "nm1",
                 LocalDate.of(2023,12,1), LocalDate.of(2026,12,2), 10);
