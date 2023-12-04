@@ -24,6 +24,10 @@ public class DestillatTilPåfyldning implements Serializable {
         return mængdeLiter;
     }
 
+    public Destillat getDestillat() {
+        return destillat;
+    }
+
     @Override
     public String toString() {
         return "destillat=" + destillat + ", mængdeLiter=" + mængdeLiter + ", alkoholProcent=" + alkoholProcent;

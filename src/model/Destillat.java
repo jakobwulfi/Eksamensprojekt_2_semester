@@ -106,9 +106,9 @@ public class Destillat implements Serializable {
     }
 
     public String destillatInfo(){
-        return String.format("Maltbatch: %s. Kornsort: %s. Medarbejder: %s.  Mængde i liter: 0:0.##. Alkohol procent: 0:0.##."
+        return String.format("Maltbatch: %s. Kornsort: %s. Medarbejder: %s.  Mængde i liter: %f. Alkohol procent: %f."
                         + " Ryge materiale: %s.  Kommentar: %s. New make nr: %s. Start dato: " + startDato.toString()
-                + ". Slut dato: " + slutDato.toString() + ". Start volume: 0:0.##", maltBatch,kornsort,medarbejder,
+                + ". Slut dato: " + slutDato.toString() + ". Start volume: %f", maltBatch,kornsort,medarbejder,
                 mængdeLiter, alkoholProcent, rygeMateriale, kommentar,newMakeNr, startVolume);
     }
 

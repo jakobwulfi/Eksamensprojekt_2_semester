@@ -394,8 +394,18 @@ public class MainGuiController {
             LocalDate startDato = LocalDate.parse(txfStartDatoPåfyld.getText());
             String medarbejder = txfMedarbejder.getText();
             LocalDate slutDato = LocalDate.parse(txfSlutDatoPåfyld.getText());
+            for (DestillatTilPåfyldning destillatTilPåfyldning : destillat){
+                if (startDato.isBefore(destillatTilPåfyldning.getDestillat().getSlutDato())){
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(guiStage.getScene().getWindow());
+                    alert.setTitle("Date Error");
+                    alert.setHeaderText("Start dato skal efter detillatets slut dato");
+                    alert.show();
+                }
+            }
 
-            if (startDato.isAfter(slutDato)) {
+            if (startDato.isAfter(slutDato))
+            {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.initOwner(guiStage.getScene().getWindow());
                 alert.setTitle("Date Error");
