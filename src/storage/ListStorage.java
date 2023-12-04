@@ -1,16 +1,19 @@
 package storage;
 
 import controller.Storage;
-import model.Destillat;
-import model.Fad;
+import model.*;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListStorage implements Storage {
+public class ListStorage implements Storage, Serializable {
     private final ArrayList<Destillat> destillater = new ArrayList<>();
     private final ArrayList<Fad> fade = new ArrayList<>();
+    private final ArrayList<Lager> lagere = new ArrayList<>();
+    private final ArrayList<Whisky> whisker = new ArrayList<>();
+    private final ArrayList<Påfyldning> påfyldninger = new ArrayList<>();
+
     //---------------------------------------------------------------------
 
     public List<Destillat> getDestillater() {
@@ -20,19 +23,48 @@ public class ListStorage implements Storage {
         destillater.add(d);
     }
 
-    //---------------------------------------------------------------------
+    // -------------------------------------------------------------------------
 
-    public List<Fad> getFade(){
+    public List<Fad> getFade() {
         return new ArrayList<>(fade);
     }
     public void storeFad(Fad f) {
         fade.add(f);
     }
 
-    //---------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+
+    public List<Lager> getLagere() {
+        return new ArrayList<>(lagere);
+    }
+
+    public void storeLager(Lager l) {
+        lagere.add(l);
+    }
+
+    // -------------------------------------------------------------------------
+
+    public List<Whisky> getWhiskyer() {
+        return new ArrayList<>(whisker);
+    }
+
+    public void storeWhisky(Whisky w) {
+        whisker.add(w);
+    }
+
+    // -------------------------------------------------------------------------
+
+    public List<Påfyldning> getPåfyldninger() {
+        return new ArrayList<>(påfyldninger);
+    }
+
+    public void storePåfyldning(Påfyldning p) {
+        påfyldninger.add(p);
+    }
+
+    // -------------------------------------------------------------------------
 
 
-    // load og save metoder
     public static ListStorage loadStorage() {
         String fileName = "src/storage/storage.ser";
         try (FileInputStream fileIn = new FileInputStream(fileName);

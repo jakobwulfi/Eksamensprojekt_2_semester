@@ -1,9 +1,14 @@
 package gui;
+
 import controller.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import model.Destillat;
+import model.Fad;
+import model.Lager;
+import model.Whisky;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -274,7 +279,7 @@ public class MainGuiController {
             double startVolume = Double.valueOf(txfStartVolume.getText());
             LocalDate start = LocalDate.parse(txfStartDato.getText());
             LocalDate slut = LocalDate.parse(txfSlutDato.getText());
-            if (alkoholProcent > 100 || alkoholProcent < 0){
+            if (alkoholProcent > 100 || alkoholProcent < 0) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.initOwner(guiStage.getScene().getWindow());
                 alert.setTitle("Procent Error");
@@ -286,19 +291,19 @@ public class MainGuiController {
                 alert.setTitle("Date Error");
                 alert.setHeaderText("Start dato skal være før slut dato.");
                 alert.show();
-            } else{
-                Controller.opretDestillat(txfMaltBatch.getText(),txfKornsort.getText(),txfMedarbejder.getText(),
-                        Double.valueOf(txfAlkoholProcent.getText()), txfRygeMateriale.getText(),txfKommentar.getText(),
-                        txfNewMakeNr.getText(), LocalDate.parse(txfStartDato.getText()),LocalDate.parse(txfSlutDato.getText()),
+            } else {
+                Controller.opretDestillat(txfMaltBatch.getText(), txfKornsort.getText(), txfMedarbejder.getText(),
+                        Double.valueOf(txfAlkoholProcent.getText()), txfRygeMateriale.getText(), txfKommentar.getText(),
+                        txfNewMakeNr.getText(), LocalDate.parse(txfStartDato.getText()), LocalDate.parse(txfSlutDato.getText()),
                         Double.valueOf(txfStartVolume.getText()));
             }
-        } catch (NumberFormatException e ){
+        } catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.initOwner(guiStage.getScene().getWindow());
             alert.setTitle("Format Error");
             alert.setHeaderText("Fejl i alkohol procent ellser start volume.");
             alert.show();
-        } catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.initOwner(guiStage.getScene().getWindow());
             alert.setTitle("Format Error");
@@ -306,7 +311,7 @@ public class MainGuiController {
             alert.show();
         }
 
-
+        //---------------------------------------------------------------------
 
     }
 
@@ -315,9 +320,9 @@ public class MainGuiController {
         try {
             int fadNr = Integer.valueOf(txfFadNr.getText());
             double fadStørrelse = Double.valueOf(txfFadStørrelse.getText());
-            Controller.opretFad(txfFadOprindelse.getText(),txfFadType.getText(),fadNr,fadStørrelse);
+            Controller.opretFad(txfFadOprindelse.getText(), txfFadType.getText(), fadNr, fadStørrelse);
 
-        } catch(NumberFormatException ex){
+        } catch (NumberFormatException ex) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.initOwner(guiStage.getScene().getWindow());
             alert.setTitle("Format Error");
@@ -326,23 +331,107 @@ public class MainGuiController {
         }
     }
 
+    //---------------------------------------------------------------------
+
     @FXML
     void opretLagerAction(ActionEvent event) {
+        try {
+            int rækker = Integer.valueOf(txfRækker.getText());
+            int hylder = Integer.valueOf(txfHylder.getText());
 
+            String adresse = txfAdresse.getText();
+            int kapacitet = Integer.valueOf(txfKapacitet.getText());
+            String navn = txfNavn.getText();
+            if (adresse.equals(null) || navn.equals(null)) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initOwner(guiStage.getScene().getWindow());
+                alert.setTitle("Indtastnings Fejl");
+                alert.setHeaderText("Indtast venlist en adresse");
+                alert.show();
+            } else {
+                Controller.opretLager(rækker, hylder, adresse, kapacitet, navn);
+            }
+        } catch (NullPointerException ex) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Format Error");
+            alert.setHeaderText("Fejl i indtastning");
+            alert.show();
+        }
     }
+
+    //---------------------------------------------------------------------
 
     @FXML
     void opretPåfyldningAction(ActionEvent event) {
+        try {
+            Destillat destillat = (Destillat) lvwDestillatPå.getSelectionModel().getSelectedItem();
+            Fad fad = (Fad) lvwFadPå.getSelectionModel().getSelectedItem(); // måske ikke korrekt
 
+            LocalDate startDato = LocalDate.parse(txfStartDato.getText());
+            String medarbejder = txfMedarbejder.getText();
+            double mængdeLiter = Double.valueOf(txfAntalLiter.getText()); // er der et max?
+            double alkoholProcent = Double.valueOf(txfAlkoholProcent.getText());
+            LocalDate slutDato = LocalDate.parse(txfSlutDato.getText());
+            if (startDato.isAfter(slutDato)) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initOwner(guiStage.getScene().getWindow());
+                alert.setTitle("Date Error");
+                alert.setHeaderText("Start dato skal være før slut dato.");
+                alert.show();
+            } else if (alkoholProcent > 100 || alkoholProcent < 0) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initOwner(guiStage.getScene().getWindow());
+                alert.setTitle("Procent Error");
+                alert.setHeaderText("Alkohol procent skal være mellem 0 og 100.");
+                alert.show();
+            } else if (medarbejder.equals(null)) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initOwner(guiStage.getScene().getWindow());
+                alert.setTitle("Indtastnings Fejl");
+                alert.setHeaderText("Indtast venlist en medarbejder");
+                alert.show();
+            } else {
+                Controller.opretPåfyldning(destillat, fad, startDato, medarbejder, mængdeLiter, alkoholProcent, slutDato);
+            }
+        } catch (NullPointerException ex) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Format Error");
+            alert.setHeaderText("Fejl i indtastning");
+            alert.show();
+        } catch (DateTimeParseException ex) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Format Error");
+            alert.setHeaderText("Fejl i indtastning");
+            alert.show();
+        } catch (NumberFormatException ex) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Format Error");
+            alert.setHeaderText("Fejl i indtastning");
+            alert.show();
+
+        }
     }
+
+    //---------------------------------------------------------------------
 
     @FXML
     void tilføjFadTilLagerAction(ActionEvent event) {
-
+        Lager lager = (Lager) lstLager.getValue();
+        Fad fad = (Fad) lvwFade.getSelectionModel().getSelectedItem(); // muuuuh
+        Controller.addFadTilLager(fad, lager);
     }
+
+    //---------------------------------------------------------------------
 
     @FXML
     void tilføjWhiskyAction(ActionEvent event) {
-
+        Whisky whisky = (Whisky) lvwWhiskyer.getSelectionModel().getSelectedItem();
+        // mangler whisky add metode?
     }
+
+    //---------------------------------------------------------------------
 }

@@ -22,7 +22,7 @@ public class Lager {
     /**
      * Tilføjer et fad til lager
      */
-    private void addFad(Fad fad) {
+    public void addFad(Fad fad) {
         fade.add(fad);
     }
 
