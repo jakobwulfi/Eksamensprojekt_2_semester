@@ -136,7 +136,10 @@ public class MainGuiController {
     private ComboBox<?> lstLager;
 
     @FXML
-    private ListView<?> lvwDestillatPå;
+    private ListView<Destillat> lvwDestillatPå;
+
+    @FXML
+    private ListView<Fad> lvwFade;
 
     @FXML
     private ListView<Destillat> lvwDestillater;
@@ -151,10 +154,7 @@ public class MainGuiController {
     private ListView<Fad> lvwFadPå;
 
     @FXML
-    private ListView<?> lvwFade;
-
-    @FXML
-    private ListView<?> lvwFadeWhisky;
+    private ListView<Fad> lvwFadeWhisky;
 
     @FXML
     private ListView<?> lvwLagre;
@@ -288,10 +288,25 @@ public class MainGuiController {
                 alert.setHeaderText("Start dato skal være før slut dato.");
                 alert.show();
             } else {
-                Controller.opretDestillat(txfMaltBatch.getText(), txfKornsort.getText(), txfMedarbejder.getText(),
+                Destillat d = Controller.opretDestillat(txfMaltBatch.getText(), txfKornsort.getText(), txfMedarbejder.getText(),
                         Double.valueOf(txfAlkoholProcent.getText()), txfRygeMateriale.getText(), txfKommentar.getText(),
                         txfNewMakeNr.getText(), LocalDate.parse(txfStartDato.getText()), LocalDate.parse(txfSlutDato.getText()),
                         Double.valueOf(txfStartVolume.getText()));
+                lvwDestillater.getItems().add(d);
+                lvwDestillatPå.getItems().add(d);
+                txfMaltBatch.clear();
+                txfKornsort.clear();
+                txfMedarbejder.clear();
+                txfAlkoholProcent.clear();
+                txfRygeMateriale.clear();
+                txfKommentar.clear();
+                txfNewMakeNr.clear();
+                txfStartDato.clear();
+                txfSlutDato.clear();
+                txfStartVolume.clear();
+
+
+
             }
         } catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -316,7 +331,14 @@ public class MainGuiController {
         try {
             int fadNr = Integer.valueOf(txfFadNr.getText());
             double fadStørrelse = Double.valueOf(txfFadStørrelse.getText());
-            Controller.opretFad(txfFadOprindelse.getText(), txfFadType.getText(), fadNr, fadStørrelse);
+            Fad f = Controller.opretFad(txfFadOprindelse.getText(), txfFadType.getText(), fadNr, fadStørrelse);
+            lvwFade.getItems().add(f);
+            lvwFadPå.getItems().add(f);
+            lvwFadeWhisky.getItems().add(f);
+            txfFadNr.clear();
+            txfFadStørrelse.clear();
+            txfFadOprindelse.clear();
+            txfFadType.clear();
 
         } catch (NumberFormatException ex) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
