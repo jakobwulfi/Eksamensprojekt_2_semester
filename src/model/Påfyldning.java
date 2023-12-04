@@ -64,4 +64,9 @@ public class Påfyldning {
     public void setSlutDato(LocalDate slutDato) {
         this.slutDato = slutDato;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

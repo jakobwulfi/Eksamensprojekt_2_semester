@@ -4,6 +4,7 @@ import controller.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.*;
 
@@ -140,6 +141,10 @@ public class MainGuiController {
 
     @FXML
     private ListView<Fad> lvwFade;
+
+
+    @FXML
+    private ListView<Fad> lvwFadeLager;
 
     @FXML
     private ListView<Destillat> lvwDestillater;
@@ -335,6 +340,7 @@ public class MainGuiController {
             lvwFade.getItems().add(f);
             lvwFadPå.getItems().add(f);
             lvwFadeWhisky.getItems().add(f);
+            lvwFadeLager.getItems().add(f);
             txfFadNr.clear();
             txfFadStørrelse.clear();
             txfFadOprindelse.clear();
@@ -385,9 +391,9 @@ public class MainGuiController {
         try {
             List<DestillatTilPåfyldning> destillat = lvwDestillaterTilPåfyldning.getItems();
             Fad fad = lvwFadPå.getSelectionModel().getSelectedItem(); // måske ikke korrekt
-            LocalDate startDato = LocalDate.parse(txfStartDato.getText());
+            LocalDate startDato = LocalDate.parse(txfStartDatoPåfyld.getText());
             String medarbejder = txfMedarbejder.getText();
-            LocalDate slutDato = LocalDate.parse(txfSlutDato.getText());
+            LocalDate slutDato = LocalDate.parse(txfSlutDatoPåfyld.getText());
 
             if (startDato.isAfter(slutDato)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -408,7 +414,7 @@ public class MainGuiController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.initOwner(guiStage.getScene().getWindow());
             alert.setTitle("Format Error");
-            alert.setHeaderText("Fejl i indtastning");
+            alert.setHeaderText("Null pointer exception");
             alert.show();
         } catch (DateTimeParseException ex) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -467,4 +473,24 @@ public class MainGuiController {
 
 
     }
+
+    @FXML
+    void showInfoDestillat(MouseEvent event) {
+        txaInfoDestillat.clear();
+       Destillat d = lvwDestillater.getSelectionModel().getSelectedItem();
+       txaInfoDestillat.insertText(0,d.destillatInfo());
+    }
+
+
+
+    public void initialise(){
+        lvwFade.getItems().addAll(Controller.getFade());
+        lvwFadeLager.getItems().addAll(Controller.getFade());
+        lvwFadPå.getItems().addAll(Controller.getFade());
+        lvwFadeWhisky.getItems().addAll(Controller.getFade());
+
+        lvwDestillater.getItems().addAll(Controller.getDestillater());
+        lvwDestillatPå.getItems().addAll(Controller.getDestillater());
+    }
+
 }

@@ -72,4 +72,10 @@ public class Fad implements Serializable {
     public void setPåfyldning(Påfyldning påfyldning) {
         this.påfyldning = påfyldning;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Oprindelses land: %s. Fad type: %s. Fadstørrelse i liter: %f. Fill nr: %d. Fad nr: %d"
+                ,fadFra,fadType,fadStørrelse,fillNr, fadNr);
+    }
 }

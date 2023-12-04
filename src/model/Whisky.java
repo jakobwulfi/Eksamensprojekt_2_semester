@@ -38,4 +38,9 @@ public class Whisky implements Serializable {
     public List<Fad> getFade() {
         return fade;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

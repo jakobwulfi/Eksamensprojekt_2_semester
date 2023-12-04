@@ -36,7 +36,7 @@
       <content>
         <AnchorPane fx:id="pnDestillater" minHeight="0.0" minWidth="0.0" prefHeight="420.0" prefWidth="600.0">
                <children>
-                  <ListView fx:id="lvwDestillater" layoutX="23.0" layoutY="52.0" prefHeight="178.0" prefWidth="200.0" />
+                  <ListView fx:id="lvwDestillater" layoutX="23.0" layoutY="52.0" onMouseClicked="#showInfoDestillat" prefHeight="178.0" prefWidth="200.0" />
                   <Label fx:id="lblDestillater" layoutX="23.0" layoutY="28.0" text="Destillater:" />
                   <TextField fx:id="txfKornsort" layoutX="406.0" layoutY="76.0" />
                   <TextField fx:id="txfMedarbejder" layoutX="406.0" layoutY="107.0" />
@@ -69,15 +69,15 @@
             <AnchorPane fx:id="pnPåfyldning" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <TextField fx:id="txfStartDatoPåfyld" layoutX="107.0" layoutY="363.0" />
-                  <TextField fx:id="txfMedarbejder" layoutX="107.0" layoutY="420.0" />
+                  <TextField fx:id="txfMedarbejderPå" layoutX="107.0" layoutY="420.0" />
                   <TextField fx:id="txfSlutDatoPåfyld" layoutX="107.0" layoutY="391.0" />
                   <Label fx:id="lblDestillatPå" layoutX="396.0" layoutY="27.0" text="Destillat:" />
-                  <Label fx:id="lblFadPå" layoutX="408.0" layoutY="331.0" text="Fad:" />
+                  <Label fx:id="lblFadPå" layoutX="397.0" layoutY="324.0" text="Fad:" />
                   <Label fx:id="lblStartDato" layoutX="25.0" layoutY="367.0" text="Start dato:" />
                   <Label fx:id="lblMedarbejder" layoutX="25.0" layoutY="424.0" text="Medarbejder:" />
                   <Label fx:id="lblSlutDato" layoutX="27.0" layoutY="395.0" text="Slut dato:" />
                   <Button fx:id="btnOpretPåfyldning" layoutX="25.0" layoutY="488.0" mnemonicParsing="false" onAction="#opretPåfyldningAction" text="Opret påfyldning" />
-                  <ListView fx:id="lvwFadPå" layoutX="408.0" layoutY="355.0" prefHeight="146.0" prefWidth="200.0" />
+                  <ListView fx:id="lvwFadPå" layoutX="395.0" layoutY="351.0" prefHeight="146.0" prefWidth="200.0" />
                   <ListView fx:id="lvwDestillatPå" layoutX="395.0" layoutY="58.0" prefHeight="183.0" prefWidth="200.0" />
                   <ComboBox fx:id="lstLager" layoutX="477.0" layoutY="272.0" prefWidth="150.0" />
                   <Label fx:id="lblLager" layoutX="403.0" layoutY="276.0" text="Lager:" />
@@ -109,7 +109,7 @@
                   <Label fx:id="lblKapacitet" layoutX="282.0" layoutY="138.0" prefHeight="17.0" prefWidth="52.0" text="Kapacitet:" />
                   <Label fx:id="lblNavn" layoutX="292.0" layoutY="177.0" text="Navn:" />
                   <Label fx:id="lblFade" layoutX="32.0" layoutY="247.0" text="Fade:" />
-                  <ListView fx:id="lvwFade" layoutX="29.0" layoutY="269.0" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="lvwFadeLager" layoutX="29.0" layoutY="269.0" prefHeight="200.0" prefWidth="200.0" />
                   <TextArea fx:id="txaFadInfo" layoutX="264.0" layoutY="269.0" prefHeight="200.0" prefWidth="200.0" />
                   <Label fx:id="lblFadInfo" layoutX="268.0" layoutY="247.0" text="Fad info:" />
                </children>
