@@ -23,8 +23,6 @@ public interface Storage {
     void storeWhisky(Whisky w);
 
     //---------------------------------------------------------------------
-    List<Påfyldning> getPåfyldninger();
-    void storePåfyldning(Påfyldning p);
 
     //---------------------------------------------------------------------
 }

@@ -5,13 +5,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import model.Destillat;
-import model.Fad;
-import model.Lager;
-import model.Whisky;
+import model.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 public class MainGuiController {
     @FXML
@@ -25,6 +23,9 @@ public class MainGuiController {
 
     @FXML
     private Button btnOpretPåfyldning;
+
+    @FXML
+    private Button btnTilføjDestillat;
 
     @FXML
     private Button btnTilføjFadTilLager;
@@ -42,13 +43,13 @@ public class MainGuiController {
     private Label lblAlkoholProcent;
 
     @FXML
-    private Label lblAntalLiter;
-
-    @FXML
     private Label lblDestillatPå;
 
     @FXML
     private Label lblDestillater;
+
+    @FXML
+    private Label lblDestillaterTilPåfyldning;
 
     @FXML
     private Label lblDestillaterWhisky;
@@ -114,9 +115,6 @@ public class MainGuiController {
     private Label lblNewMakeNr;
 
     @FXML
-    private Label lblPåfyldninger;
-
-    @FXML
     private Label lblRygeMateriale;
 
     @FXML
@@ -141,13 +139,16 @@ public class MainGuiController {
     private ListView<?> lvwDestillatPå;
 
     @FXML
-    private ListView<?> lvwDestillater;
+    private ListView<Destillat> lvwDestillater;
+
+    @FXML
+    private ListView<DestillatTilPåfyldning> lvwDestillaterTilPåfyldning;
 
     @FXML
     private ListView<?> lvwDestillaterWhisky;
 
     @FXML
-    private ListView<?> lvwFadPå;
+    private ListView<Fad> lvwFadPå;
 
     @FXML
     private ListView<?> lvwFade;
@@ -157,9 +158,6 @@ public class MainGuiController {
 
     @FXML
     private ListView<?> lvwLagre;
-
-    @FXML
-    private ListView<?> lvwPåfyldninger;
 
     @FXML
     private ListView<?> lvwWhiskyer;
@@ -208,12 +206,6 @@ public class MainGuiController {
 
     @FXML
     private TextField txfAlkoholProcent;
-
-    @FXML
-    private TextField txfAlkoholProcentPåfyld;
-
-    @FXML
-    private TextField txfAntalLiter;
 
     @FXML
     private TextField txfFadNr;
@@ -271,6 +263,10 @@ public class MainGuiController {
 
     @FXML
     private TextField txfStartVolume;
+
+    @FXML
+    private TextField txfVolumen;
+
 
     @FXML
     void opretDestillatAction(ActionEvent event) {
@@ -365,25 +361,17 @@ public class MainGuiController {
     @FXML
     void opretPåfyldningAction(ActionEvent event) {
         try {
-            Destillat destillat = (Destillat) lvwDestillatPå.getSelectionModel().getSelectedItem();
-            Fad fad = (Fad) lvwFadPå.getSelectionModel().getSelectedItem(); // måske ikke korrekt
-
+            List<DestillatTilPåfyldning> destillat = lvwDestillaterTilPåfyldning.getItems();
+            Fad fad = lvwFadPå.getSelectionModel().getSelectedItem(); // måske ikke korrekt
             LocalDate startDato = LocalDate.parse(txfStartDato.getText());
             String medarbejder = txfMedarbejder.getText();
-            double mængdeLiter = Double.valueOf(txfAntalLiter.getText()); // er der et max?
-            double alkoholProcent = Double.valueOf(txfAlkoholProcent.getText());
             LocalDate slutDato = LocalDate.parse(txfSlutDato.getText());
+
             if (startDato.isAfter(slutDato)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.initOwner(guiStage.getScene().getWindow());
                 alert.setTitle("Date Error");
                 alert.setHeaderText("Start dato skal være før slut dato.");
-                alert.show();
-            } else if (alkoholProcent > 100 || alkoholProcent < 0) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.initOwner(guiStage.getScene().getWindow());
-                alert.setTitle("Procent Error");
-                alert.setHeaderText("Alkohol procent skal være mellem 0 og 100.");
                 alert.show();
             } else if (medarbejder.equals(null)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -392,7 +380,7 @@ public class MainGuiController {
                 alert.setHeaderText("Indtast venlist en medarbejder");
                 alert.show();
             } else {
-                Controller.opretPåfyldning(destillat, fad, startDato, medarbejder, mængdeLiter, alkoholProcent, slutDato);
+                Controller.opretPåfyldning(destillat, fad, startDato, medarbejder, slutDato);
             }
         } catch (NullPointerException ex) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -404,15 +392,14 @@ public class MainGuiController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.initOwner(guiStage.getScene().getWindow());
             alert.setTitle("Format Error");
-            alert.setHeaderText("Fejl i indtastning");
+            alert.setHeaderText("Fejl i Dato indtastning");
             alert.show();
-        } catch (NumberFormatException ex) {
+        } catch (IllegalArgumentException e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.initOwner(guiStage.getScene().getWindow());
             alert.setTitle("Format Error");
-            alert.setHeaderText("Fejl i indtastning");
+            alert.setHeaderText(e.getMessage());
             alert.show();
-
         }
     }
 
@@ -434,4 +421,28 @@ public class MainGuiController {
     }
 
     //---------------------------------------------------------------------
+
+    @FXML
+    void opretDestillatTilPåfyldningAction(ActionEvent event) {
+        try {
+            Destillat destillat = lvwDestillater.getSelectionModel().getSelectedItem();
+            double mængdeLiter = Double.valueOf(txfVolumen.getText());
+            DestillatTilPåfyldning d = Controller.opretDestillatTilPåfyldning(destillat,mængdeLiter);
+            lvwDestillaterTilPåfyldning.getItems().add(d);
+        } catch (NumberFormatException e){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Format Error");
+            alert.setHeaderText("Fejl i Volumen");
+            alert.show();
+        } catch (IllegalArgumentException e){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Format Error");
+            alert.setHeaderText(e.getMessage());
+            alert.show();
+        }
+
+
+    }
 }

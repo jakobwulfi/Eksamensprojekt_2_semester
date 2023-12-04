@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lager {
+public class Lager implements Serializable {
     private int rækker;
     private int hylder;
     private String adresse;

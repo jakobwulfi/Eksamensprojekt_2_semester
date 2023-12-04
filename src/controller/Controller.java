@@ -5,6 +5,7 @@ import model.*;
 import java.time.LocalDate;
 import java.util.List;
 
+
 public abstract class Controller {
     private static Storage storage;
     public static void setStorage(Storage storage) {
@@ -139,30 +140,48 @@ public abstract class Controller {
      * Opret en nyt Påfyldning
      * Pre:
      */
-    public static Påfyldning opretPåfyldning(Destillat destillat, Fad fad, LocalDate startDato, String medarbejder, double mængdeLiter, double alkoholProcent, LocalDate slutDato) {
-        Påfyldning p = new Påfyldning(destillat, fad, startDato, medarbejder, mængdeLiter, alkoholProcent, slutDato);
-        storage.storePåfyldning(p);
-        return p;
+    public static Påfyldning opretPåfyldning(List<DestillatTilPåfyldning> destillater, Fad fad, LocalDate startDato,
+                                             String medarbejder,  LocalDate slutDato) {
+        double volumen = 0;
+        for (DestillatTilPåfyldning destillatTilPåfyldning : destillater){
+            volumen+= destillatTilPåfyldning.getMængdeLiter();
+        }
+        if (volumen > fad.getFadStørrelse()){
+            throw new IllegalArgumentException("Påfyldning for stor til fad");
+        } else {
+            Påfyldning p = new Påfyldning(destillater, startDato, medarbejder, slutDato);
+            fad.setPåfyldning(p);
+            return p;
+        }
+    }
+
+    /**
+     * Opret er DestillatTilPåfyldning
+     */
+
+    public static DestillatTilPåfyldning opretDestillatTilPåfyldning(Destillat destillat, double mængdeLiter){
+        if (destillat.getMængdeLiter() - mængdeLiter < 0) {
+           throw new IllegalArgumentException("Mængden af væske til påfyldning er større end mængden der er tilbage af destillatet");
+        }
+        DestillatTilPåfyldning d = new DestillatTilPåfyldning(destillat, mængdeLiter,destillat.getAlkoholProcent());
+        destillat.setMængdeLiter(destillat.getMængdeLiter() - mængdeLiter);
+        return d;
     }
 
     /**
      * Update Påfyldning.
      * Pre:
      */
-    public static void updatePåfyldning(Påfyldning påfyldning, Destillat destillat, Fad fad, LocalDate startDato,
+    /*public static void updatePåfyldning(Påfyldning påfyldning, Destillat destillat, Fad fad, LocalDate startDato,
                                         String medarbejder, double antalLiter, double alkoholProcent, LocalDate slutDato) {
-        påfyldning.setDestillat(destillat);
         //påfyldning.setFad(fad);
         påfyldning.setStartDato(startDato);
         påfyldning.setMedarbejder(medarbejder);
         //påfyldning.setAntalLiter(antalLiter);
         påfyldning.setAlkoholProcent(alkoholProcent);
         påfyldning.setSlutDato(slutDato);
-    }
+    }*/
 
-    public static List<Påfyldning> getPåfyldninger() {
-        return storage.getPåfyldninger();
-    }
 
     //---------------------------------------------------------------------
 }

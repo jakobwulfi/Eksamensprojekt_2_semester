@@ -1,31 +1,28 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Påfyldning {
-    private Destillat destillat;
+    private List<DestillatTilPåfyldning> destillater;
     private LocalDate startDato;
     private String medarbejder;
-    private double mængdeLiter;
-    private double alkoholProcent;
+    private double alkoholProcentStart;
+    private double alkoholProcentNu;
     private LocalDate slutDato;
 
-    public Påfyldning(Destillat destillat, Fad fad, LocalDate startDato, String medarbejder, double antalLiter, double alkoholProcent, LocalDate slutDato) {
-        this.destillat = destillat;
+    public Påfyldning(List<DestillatTilPåfyldning> destillater,  LocalDate startDato, String medarbejder,  LocalDate slutDato) {
+        this.destillater = destillater;
         this.startDato = startDato;
         this.medarbejder = medarbejder;
-        this.mængdeLiter = antalLiter;
-        this.alkoholProcent = alkoholProcent;
         this.slutDato = slutDato;
+        beregnStartProcent();
     }
     // metoder
 
     // get og set
-    public Destillat getDestillat() {
-        return destillat;
-    }
-    public void setDestillat(Destillat destillat) {
-        this.destillat = destillat;
+    public List<DestillatTilPåfyldning> getDestillat() {
+        return destillater;
     }
     public LocalDate getStartDato() {
         return startDato;
@@ -39,17 +36,27 @@ public class Påfyldning {
     public void setMedarbejder(String medarbejder) {
         this.medarbejder = medarbejder;
     }
-    public double getMængdeLiter() {
-        return mængdeLiter;
+
+    /*public double getMængdeLiter() {
+        return ;
+    }*/
+
+    public void beregnStartProcent(){
+        double alkoholVolume = 0;
+        double volume = 0;
+        for (DestillatTilPåfyldning destillatTilPåfyldning : destillater){
+            alkoholVolume += (destillatTilPåfyldning.getMængdeLiter() * (destillatTilPåfyldning.getAlkoholProcent()/100));
+            volume += destillatTilPåfyldning.getMængdeLiter();
+        }
+        this.alkoholProcentStart = (alkoholVolume/volume)* 100;
+        this.alkoholProcentNu = alkoholProcentStart;
     }
-    public void setMængdeLiter(double mængdeLiter) {
-        this.mængdeLiter = mængdeLiter;
-    }
+
     public double getAlkoholProcent() {
-        return alkoholProcent;
+        return alkoholProcentNu;
     }
     public void setAlkoholProcent(double alkoholProcent) {
-        this.alkoholProcent = alkoholProcent;
+        this.alkoholProcentNu = alkoholProcent;
     }
     public LocalDate getSlutDato() {
         return slutDato;

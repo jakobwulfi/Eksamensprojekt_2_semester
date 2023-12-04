@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Whisky {
+public class Whisky implements Serializable {
     private String whiskyType;
     private int nummer;
     private List<Destillat> destillater = new ArrayList<>();

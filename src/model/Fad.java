@@ -13,7 +13,7 @@ public class Fad implements Serializable {
     private int rækkeNr;
     private int hylde;
     private double NuværendeMængdeLiter = 0;
-    private List<Påfyldning> påfyldninger = new ArrayList<>();
+    private Påfyldning påfyldning;
 
     public Fad(String fadFra, String fadType, int fadNr, double fadStørrelse) {
         this.fadFra = fadFra;
@@ -62,10 +62,14 @@ public class Fad implements Serializable {
     public void setFadStørrelse(double fadStørrelse) {
         this.fadStørrelse = fadStørrelse;
     }
-    public List<Påfyldning> getPåfyldninger() {
-        return påfyldninger;
+    public Påfyldning getPåfyldning() {
+        return påfyldning;
     }
     public double getNuværendeMængdeLiter() {
         return NuværendeMængdeLiter;
+    }
+
+    public void setPåfyldning(Påfyldning påfyldning) {
+        this.påfyldning = påfyldning;
     }
 }

@@ -12,7 +12,7 @@ public class ListStorage implements Storage, Serializable {
     private final ArrayList<Fad> fade = new ArrayList<>();
     private final ArrayList<Lager> lagere = new ArrayList<>();
     private final ArrayList<Whisky> whisker = new ArrayList<>();
-    private final ArrayList<Påfyldning> påfyldninger = new ArrayList<>();
+
 
     //---------------------------------------------------------------------
 
@@ -54,13 +54,6 @@ public class ListStorage implements Storage, Serializable {
 
     // -------------------------------------------------------------------------
 
-    public List<Påfyldning> getPåfyldninger() {
-        return new ArrayList<>(påfyldninger);
-    }
-
-    public void storePåfyldning(Påfyldning p) {
-        påfyldninger.add(p);
-    }
 
     // -------------------------------------------------------------------------
 
