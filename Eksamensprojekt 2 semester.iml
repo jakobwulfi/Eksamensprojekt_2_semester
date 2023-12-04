@@ -38,5 +38,6 @@
     <orderEntry type="library" exported="" name="javafx.fxml" level="application" />
     <orderEntry type="library" exported="" name="javafx.base" level="application" />
     <orderEntry type="library" exported="" name="javafx-sdk-17.0" level="project" />
+    <orderEntry type="library" name="javafx" level="application" />
   </component>
 </module>

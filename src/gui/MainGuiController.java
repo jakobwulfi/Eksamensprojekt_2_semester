@@ -481,9 +481,7 @@ public class MainGuiController {
        txaInfoDestillat.insertText(0,d.destillatInfo());
     }
 
-
-
-    public void initialise(){
+    public void initialize() {
         lvwFade.getItems().addAll(Controller.getFade());
         lvwFadeLager.getItems().addAll(Controller.getFade());
         lvwFadPå.getItems().addAll(Controller.getFade());
