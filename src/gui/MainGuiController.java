@@ -383,7 +383,8 @@ public class MainGuiController {
                 alert.setHeaderText("Indtast venlist en adresse og et navn");
                 alert.show();
             } else {
-                Controller.opretLager(adresse, navn, rækker, hylder,pladsHylde);
+                Lager l = Controller.opretLager(adresse, navn, rækker, hylder,pladsHylde);
+                lvwLagre.getItems().add(l);
             }
         } catch (NullPointerException ex) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -539,6 +540,8 @@ public class MainGuiController {
 
         lvwDestillater.getItems().addAll(Controller.getDestillater());
         lvwDestillatPå.getItems().addAll(Controller.getDestillater());
+
+        lvwLagre.getItems().addAll(Controller.getLagere());
     }
 
 }
