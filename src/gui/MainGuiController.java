@@ -4,6 +4,8 @@ import controller.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.*;
@@ -33,6 +35,9 @@ public class MainGuiController {
 
     @FXML
     private Button btnTilføjWhisky;
+
+    @FXML
+    private ImageView imgLogo;
 
     @FXML
     private TabPane guiStage;
@@ -533,6 +538,7 @@ public class MainGuiController {
     }
 
     public void initialize() {
+
         lvwFade.getItems().addAll(Controller.getFade());
         lvwFadeLager.getItems().addAll(Controller.getFade());
         lvwFadPå.getItems().addAll(Controller.getFade());
