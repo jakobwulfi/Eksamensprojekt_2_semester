@@ -10,8 +10,6 @@ public class Fad implements Serializable {
     private int fillNr;
     private int fadNr;
     private double fadStørrelse;
-    private int rækkeNr;
-    private int hylde;
     private double NuværendeMængdeLiter = 0;
     private Påfyldning påfyldning;
 

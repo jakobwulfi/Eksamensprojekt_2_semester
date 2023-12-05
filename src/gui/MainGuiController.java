@@ -373,7 +373,7 @@ public class MainGuiController {
                 alert.setHeaderText("Indtast venlist en adresse");
                 alert.show();
             } else {
-                Controller.opretLager(rækker, hylder, adresse, kapacitet, navn);
+                Controller.opretLager(adresse, kapacitet, navn);
             }
         } catch (NullPointerException ex) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -444,10 +444,10 @@ public class MainGuiController {
     //---------------------------------------------------------------------
 
     @FXML
-    void tilføjFadTilLagerAction(ActionEvent event) {
-        Lager lager = (Lager) lstLager.getValue();
+    void tilføjFadTilLagerAction(ActionEvent event) { // skal laves fra lager til hylde
+        Hylde hylde = (Hylde) lstLager.getValue();
         Fad fad = (Fad) lvwFade.getSelectionModel().getSelectedItem(); // muuuuh
-        Controller.addFadTilLager(fad, lager);
+        Controller.addFadTilHylde(fad, hylde);
     }
 
     //---------------------------------------------------------------------

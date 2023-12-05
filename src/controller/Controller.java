@@ -83,8 +83,8 @@ public abstract class Controller {
      * Opret et nyt Lager
      * Pre:
      */
-    public static Lager opretLager(int rækker, int hylder, String adresse, int kapacitet, String navn) {
-        Lager l = new Lager(rækker, hylder, adresse, kapacitet, navn);
+    public static Lager opretLager(String adresse, int kapacitet, String navn) {
+        Lager l = new Lager(adresse, kapacitet, navn);
         storage.storeLager(l);
         return l;
     }
@@ -93,16 +93,14 @@ public abstract class Controller {
      * Update Lager.
      * Pre:
      */
-    public static void updateLager(Lager lager, int rækker, int hylder, String adresse, int kapacitet, String navn) {
-        lager.setRækker(rækker);
-        lager.setHylder(hylder);
+    public static void updateLager(Lager lager, String adresse, int kapacitet, String navn) {
         lager.setAdresse(adresse);
         lager.setKapacitet(kapacitet);
         lager.setNavn(navn);
     }
 
-    public static void addFadTilLager(Fad fad, Lager lager) {
-        lager.addFad(fad);
+    public static void addFadTilHylde(Fad fad, Hylde hylde) {
+        hylde.addFad(fad);
     }
 
     public static List<Lager> getLagere() {
