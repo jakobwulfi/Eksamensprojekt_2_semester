@@ -12,7 +12,7 @@ public class Hylde implements Serializable {
 
     public Hylde(int hyldeNr, int maxKapacitet) {
         this.hyldeNr = hyldeNr;
-        this.ledig = ledig;
+        this.ledig = true;
         this.maxKapacitet = maxKapacitet;
     }
 

@@ -9,9 +9,9 @@ public class Række implements Serializable {
     boolean ledig;
     List<Hylde> hylder = new ArrayList<>();
 
-    public Række(int rækkeNr, boolean ledig) {
+    public Række(int rækkeNr) {
         this.rækkeNr = rækkeNr;
-        this.ledig = ledig;
+        this.ledig = true;
     }
 
     public int getRækkeNr() {
