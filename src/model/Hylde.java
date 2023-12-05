@@ -8,9 +8,9 @@ public class Hylde implements Serializable {
     int hyldeNr;
     boolean ledig;
     int maxKapacitet;
-    List<Fad> fade = new ArrayList<>();
+    private final List<Fad> fade = new ArrayList<>();
 
-    public Hylde(int hyldeNr, boolean ledig, int maxKapacitet) {
+    public Hylde(int hyldeNr, int maxKapacitet) {
         this.hyldeNr = hyldeNr;
         this.ledig = ledig;
         this.maxKapacitet = maxKapacitet;
@@ -35,9 +35,15 @@ public class Hylde implements Serializable {
     //---------------------------------------------------------------------
 
     /**
-     * Tilføjer et fad til lager
+     * Tilføjer et fad til hylden.
+     * Thrower en IllegalArgumentException, hvis size på Listen af fade er lig med maxKapacitet.
      */
     public void addFad(Fad fad) {
-        fade.add(fad);
+        if (fade.size() < maxKapacitet) {
+            fade.add(fad);
+        } else {
+            throw new IllegalArgumentException("Hylden er fuld.");
+        }
+
     }
 }

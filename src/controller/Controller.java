@@ -84,7 +84,7 @@ public abstract class Controller {
      * Pre:
      */
     public static Lager opretLager(String adresse, int kapacitet, String navn) {
-        Lager l = new Lager(adresse, kapacitet, navn);
+        Lager l = new Lager(adresse, navn);
         storage.storeLager(l);
         return l;
     }

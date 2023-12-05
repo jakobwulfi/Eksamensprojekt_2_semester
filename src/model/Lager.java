@@ -10,15 +10,13 @@ public class Lager implements Serializable {
     private String navn;
     private List<Række> rækker = new ArrayList<>();
 
-    public Lager(String adresse, int kapacitet, String navn) {
+    public Lager(String adresse, String navn) {
         this.adresse = adresse;
-        this.kapacitet = kapacitet;
         this.navn = navn;
     }
 
-    public Lager(String adresse, int kapacitet, String navn, List<Række> rækker) {
+    public Lager(String adresse, String navn, List<Række> rækker) {
         this.adresse = adresse;
-        this.kapacitet = kapacitet;
         this.navn = navn;
         this.rækker = rækker;
     }
@@ -46,9 +44,17 @@ public class Lager implements Serializable {
     public List<Række> getRækker() {
         return rækker;
     }
-
+    public int getmaxKapacitet() {
+        int sum = 0;
+        for (Række r : rækker) {
+            for (Hylde h : r.getHylder()) {
+                sum += h.getMaxKapacitet();
+            }
+        }
+        return sum;
+    }
     @Override
     public String toString() {
-        return super.toString();
+        return navn + ", adresse: " + adresse + ", kapacitet: " + getmaxKapacitet();
     }
 }

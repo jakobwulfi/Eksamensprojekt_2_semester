@@ -17,7 +17,9 @@ public class Række implements Serializable {
     public int getRækkeNr() {
         return rækkeNr;
     }
-
+    public List<Hylde> getHylder() {
+        return hylder;
+    }
     public boolean isLedig() {
         return ledig;
     }
