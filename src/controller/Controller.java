@@ -122,11 +122,6 @@ public abstract class Controller {
     public static void addFadTilHylde(Fad fad, Hylde hylde) {
         hylde.addFad(fad);
     }
-
-    public static List<Hylde> getHylder() {
-        return storage.getHylder();
-    }
-
     //---------------------------------------------------------------------
 
     /**
@@ -140,11 +135,6 @@ public abstract class Controller {
         }
         return lager.getRækker();
     }
-
-    public static List<Række> getRækker() {
-        return storage.getRækker();
-    }
-
     //---------------------------------------------------------------------
     /**
      * Opret en nyt Whisky

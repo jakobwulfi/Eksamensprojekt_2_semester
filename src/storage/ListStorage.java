@@ -12,8 +12,6 @@ public class ListStorage implements Storage, Serializable {
     private final ArrayList<Fad> fade = new ArrayList<>();
     private final ArrayList<Lager> lagere = new ArrayList<>();
     private final ArrayList<Whisky> whisker = new ArrayList<>();
-    private final ArrayList<Hylde> hylder = new ArrayList<>();
-    private final ArrayList<Række> rækker = new ArrayList<>();
 
     //---------------------------------------------------------------------
 
