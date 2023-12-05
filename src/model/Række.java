@@ -42,15 +42,16 @@ public class Række implements Serializable {
     //---------------------------------------------------------------------
 
     /**
-     * Returnere true hvis rækken er fyldt, ud fra hylde
+     * Returnere true hvis rækken er fyldt
      * Returnere false hvis det er mere plads
      */
-    public boolean ErRækkeFyldt(Hylde hylde) {
-        if (hylder.size() == hylde.getMaxKapacitet()) {
-            return true;
-        } else {
-            return false;
+    public boolean ErRækkeFyldt() {
+        boolean erLedig = false;
+        int i = 0;
+        while (!erLedig && (i < hylder.size())) {
+            erLedig = hylder.get(i).isLedig();
+            i++;
         }
+        return erLedig;
     }
-
 }

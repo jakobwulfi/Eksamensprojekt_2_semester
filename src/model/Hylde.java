@@ -49,15 +49,34 @@ public class Hylde implements Serializable {
     //---------------------------------------------------------------------
 
     /**
-     * Tilføjer et fad til hylden.
+     * Tilføjer et fad til hylden. Hvis størrelsen på Listen af fad er lig med mmaxkapacitet,
+     * bliver ledig sat til false.
      * Thrower en IllegalArgumentException, hvis size på Listen af fade er lig med maxKapacitet.
      */
     public void addFad(Fad fad) {
         if (fade.size() < maxKapacitet) {
             fade.add(fad);
+            if (!ledig) {
+                ledig = false;
+            }
         } else {
             throw new IllegalArgumentException("Hylden er fuld.");
         }
+    }
 
+    /**
+     * Fjerner et fad fra hylden, og subtrahere 1 fra maxKapacitet.
+     * Thrower en NullPointerException
+     * @param fad der skal fjernes
+     * @throws en NullPointerException, hvis fadet ikke findes på hylden.
+     */
+    public void removeFad(Fad fad) {
+        if (fade.contains(fad)) {
+            fade.remove(fad);
+            maxKapacitet--;
+            ledig = true;
+        } else {
+            throw new NullPointerException("Fadet er ikke på hylden.");
+        }
     }
 }

@@ -118,7 +118,6 @@ public abstract class Controller {
         }
     }
 
-
     public static void addFadTilHylde(Fad fad, Hylde hylde) {
         hylde.addFad(fad);
     }
