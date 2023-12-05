@@ -373,7 +373,7 @@ public class MainGuiController {
                 alert.setHeaderText("Indtast venlist en adresse");
                 alert.show();
             } else {
-                Controller.opretLager(adresse, kapacitet, navn);
+                Controller.opretLager(adresse, navn);
             }
         } catch (NullPointerException ex) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

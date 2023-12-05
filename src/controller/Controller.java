@@ -83,7 +83,7 @@ public abstract class Controller {
      * Opret et nyt Lager
      * Pre:
      */
-    public static Lager opretLager(String adresse, int kapacitet, String navn) {
+    public static Lager opretLager(String adresse, String navn) {
         Lager l = new Lager(adresse, navn);
         storage.storeLager(l);
         return l;
@@ -93,9 +93,8 @@ public abstract class Controller {
      * Update Lager.
      * Pre:
      */
-    public static void updateLager(Lager lager, String adresse, int kapacitet, String navn) {
+    public static void updateLager(Lager lager, String adresse, String navn) {
         lager.setAdresse(adresse);
-        lager.setKapacitet(kapacitet);
         lager.setNavn(navn);
     }
 
@@ -107,13 +106,16 @@ public abstract class Controller {
     //---------------------------------------------------------------------
 
     /**
-     * Opret et nyt Hylde
+     * Opret en ny Hylde
      * Pre:
      */
-    public static Hylde opretHylde(int hyldeNr, int maxKapacitet) {
-        Hylde h = new Hylde(hyldeNr, maxKapacitet);
-        storage.storeHylde(h);
-        return h;
+    public static void opretHylde(int maxKapacitet, int antal, Lager lager) {
+        for (Række r : lager.getRækker()) {
+            for (int i = 0; i < antal; i++) {
+                Hylde h = new Hylde(i+1, maxKapacitet);
+                r.addHylde(h);
+            }
+        }
     }
 
 
@@ -131,10 +133,12 @@ public abstract class Controller {
      * Opret ny Række
      * Pre:
      */
-    public static Række opretRække(int rækkeNr) {
-        Række r = new Række(rækkeNr);
-        storage.storeRække(r);
-        return r;
+    public static List<Række> opretRække(Lager lager, int antal) {
+        for (int i = 0; i < antal; i++) {
+            Række r = new Række(i+1, lager);
+            lager.addRække(r);
+        }
+        return lager.getRækker();
     }
 
     public static List<Række> getRækker() {

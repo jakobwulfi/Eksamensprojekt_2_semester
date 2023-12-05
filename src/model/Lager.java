@@ -44,6 +44,9 @@ public class Lager implements Serializable {
     public List<Række> getRækker() {
         return rækker;
     }
+    public void addRække(Række række) {
+        rækker.add(række);
+    }
     public int getmaxKapacitet() {
         int sum = 0;
         for (Række r : rækker) {

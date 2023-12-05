@@ -9,7 +9,7 @@ public class Række implements Serializable {
     private boolean ledig;
     private final List<Hylde> hylder = new ArrayList<>();
 
-    public Række(int rækkeNr) {
+    public Række(int rækkeNr, Lager lager) {
         this.rækkeNr = rækkeNr;
         this.ledig = true;
     }
@@ -22,6 +22,9 @@ public class Række implements Serializable {
 
     public List<Hylde> getHylder() {
         return hylder;
+    }
+    public void addHylde(Hylde h) {
+        hylder.add(h);
     }
 
     public boolean isLedig() {
