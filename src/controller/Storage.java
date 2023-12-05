@@ -23,6 +23,12 @@ public interface Storage {
     void storeWhisky(Whisky w);
 
     //---------------------------------------------------------------------
+    List<Hylde> getHylder();
+    void storeHylde(Hylde h);
+
+    //---------------------------------------------------------------------
+    List<Række> getRækker();
+    void storeRække(Række r);
 
     //---------------------------------------------------------------------
 }

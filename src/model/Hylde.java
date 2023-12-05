@@ -16,6 +16,8 @@ public class Hylde implements Serializable {
         this.maxKapacitet = maxKapacitet;
     }
 
+    //---------------------------------------------------------------------
+
     public int getHyldeNr() {
         return hyldeNr;
     }
@@ -30,6 +32,18 @@ public class Hylde implements Serializable {
 
     public List<Fad> getFade() {
         return fade;
+    }
+
+    public void setHyldeNr(int hyldeNr) {
+        this.hyldeNr = hyldeNr;
+    }
+
+    public void setLedig(boolean ledig) {
+        this.ledig = ledig;
+    }
+
+    public void setMaxKapacitet(int maxKapacitet) {
+        this.maxKapacitet = maxKapacitet;
     }
 
     //---------------------------------------------------------------------

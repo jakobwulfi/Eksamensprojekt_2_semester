@@ -99,9 +99,6 @@ public abstract class Controller {
         lager.setNavn(navn);
     }
 
-    public static void addFadTilHylde(Fad fad, Hylde hylde) {
-        hylde.addFad(fad);
-    }
 
     public static List<Lager> getLagere() {
         return storage.getLagere();
@@ -109,6 +106,42 @@ public abstract class Controller {
 
     //---------------------------------------------------------------------
 
+    /**
+     * Opret et nyt Hylde
+     * Pre:
+     */
+    public static Hylde opretHylde(int hyldeNr, int maxKapacitet) {
+        Hylde h = new Hylde(hyldeNr, maxKapacitet);
+        storage.storeHylde(h);
+        return h;
+    }
+
+
+    public static void addFadTilHylde(Fad fad, Hylde hylde) {
+        hylde.addFad(fad);
+    }
+
+    public static List<Hylde> getHylder() {
+        return storage.getHylder();
+    }
+
+    //---------------------------------------------------------------------
+
+    /**
+     * Opret ny Række
+     * Pre:
+     */
+    public static Række opretRække(int rækkeNr) {
+        Række r = new Række(rækkeNr);
+        storage.storeRække(r);
+        return r;
+    }
+
+    public static List<Række> getRækker() {
+        return storage.getRækker();
+    }
+
+    //---------------------------------------------------------------------
     /**
      * Opret en nyt Whisky
      * Pre:

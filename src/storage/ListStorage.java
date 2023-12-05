@@ -12,7 +12,8 @@ public class ListStorage implements Storage, Serializable {
     private final ArrayList<Fad> fade = new ArrayList<>();
     private final ArrayList<Lager> lagere = new ArrayList<>();
     private final ArrayList<Whisky> whisker = new ArrayList<>();
-
+    private final ArrayList<Hylde> hylder = new ArrayList<>();
+    private final ArrayList<Række> rækker = new ArrayList<>();
 
     //---------------------------------------------------------------------
 
@@ -54,9 +55,29 @@ public class ListStorage implements Storage, Serializable {
 
     // -------------------------------------------------------------------------
 
+    @Override
+    public List<Hylde> getHylder() {
+        return new ArrayList<>(hylder);
+    }
+
+    @Override
+    public void storeHylde(Hylde h) {
+        hylder.add(h);
+    }
 
     // -------------------------------------------------------------------------
 
+    @Override
+    public List<Række> getRækker() {
+        return new ArrayList<>(rækker);
+    }
+
+    @Override
+    public void storeRække(Række r) {
+        rækker.add(r);
+    }
+
+    // -------------------------------------------------------------------------
 
     public static ListStorage loadStorage() {
         String fileName = "src/storage/storage.ser";
