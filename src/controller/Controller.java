@@ -81,7 +81,7 @@ public abstract class Controller {
 
     /**
      * Opret et nyt Lager
-     * Pre:
+     * Pre: rækker, hylder og pladsHylde er > 0
      */
     public static Lager opretLager(String adresse, String navn, int rækker, int hylder, int pladsHylde) {
         Lager l = new Lager(adresse, navn);
