@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Række implements Serializable {
-    int rækkeNr;
-    boolean ledig;
-    List<Hylde> hylder = new ArrayList<>();
+    private int rækkeNr;
+    private boolean ledig;
+    private final List<Hylde> hylder = new ArrayList<>();
 
     public Række(int rækkeNr) {
         this.rækkeNr = rækkeNr;

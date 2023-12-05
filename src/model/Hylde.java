@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hylde implements Serializable {
-    int hyldeNr;
-    boolean ledig;
-    int maxKapacitet;
+    private int hyldeNr;
+    private boolean ledig;
+    private int maxKapacitet;
     private final List<Fad> fade = new ArrayList<>();
 
     public Hylde(int hyldeNr, int maxKapacitet) {
