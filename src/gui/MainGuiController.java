@@ -162,7 +162,7 @@ public class MainGuiController {
     private ListView<Fad> lvwFadeWhisky;
 
     @FXML
-    private ListView<?> lvwLagre;
+    private ListView<Lager> lvwLagre;
 
     @FXML
     private ListView<?> lvwWhiskyer;
@@ -225,10 +225,13 @@ public class MainGuiController {
     private TextField txfFadType;
 
     @FXML
-    private TextField txfHylder;
+    private TextField txfHylde;
 
     @FXML
-    private TextField txfKapacitet;
+    private TextField txfHyldeNr;
+
+    @FXML
+    private TextField txfHylder;
 
     @FXML
     private TextField txfKommentar;
@@ -243,6 +246,9 @@ public class MainGuiController {
     private TextField txfMedarbejder;
 
     @FXML
+    private TextField txfMedarbejderPå;
+
+    @FXML
     private TextField txfNavn;
 
     @FXML
@@ -250,6 +256,9 @@ public class MainGuiController {
 
     @FXML
     private TextField txfRygeMateriale;
+
+    @FXML
+    private TextField txfRækkeNr;
 
     @FXML
     private TextField txfRækker;
@@ -271,6 +280,7 @@ public class MainGuiController {
 
     @FXML
     private TextField txfVolumen;
+
 
 
     @FXML
@@ -362,24 +372,31 @@ public class MainGuiController {
         try {
             int rækker = Integer.valueOf(txfRækker.getText());
             int hylder = Integer.valueOf(txfHylder.getText());
+            int pladsHylde = Integer.valueOf(txfHylde.getText());
 
             String adresse = txfAdresse.getText();
-            int kapacitet = Integer.valueOf(txfKapacitet.getText());
             String navn = txfNavn.getText();
             if (adresse.equals(null) || navn.equals(null)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.initOwner(guiStage.getScene().getWindow());
                 alert.setTitle("Indtastnings Fejl");
-                alert.setHeaderText("Indtast venlist en adresse");
+                alert.setHeaderText("Indtast venlist en adresse og et navn");
                 alert.show();
             } else {
-                Controller.opretLager(adresse, navn);
+                Lager l = Controller.opretLager(adresse, navn, rækker, hylder,pladsHylde);
+                lvwLagre.getItems().add(l);
             }
         } catch (NullPointerException ex) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.initOwner(guiStage.getScene().getWindow());
             alert.setTitle("Format Error");
             alert.setHeaderText("Fejl i indtastning");
+            alert.show();
+        } catch (NumberFormatException ex){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Format Error");
+            alert.setHeaderText("Fejl række, hylde  eller plads på hylden");
             alert.show();
         }
     }
@@ -445,9 +462,33 @@ public class MainGuiController {
 
     @FXML
     void tilføjFadTilLagerAction(ActionEvent event) { // skal laves fra lager til hylde
-        Hylde hylde = (Hylde) lstLager.getValue();
-        Fad fad = (Fad) lvwFade.getSelectionModel().getSelectedItem(); // muuuuh
-        Controller.addFadTilHylde(fad, hylde);
+        try {
+            int hylde = Integer.valueOf(txfHyldeNr.getText());
+            int række = Integer.valueOf(txfRækkeNr.getText());
+            Lager lager = lvwLagre.getSelectionModel().getSelectedItem();
+
+            Fad fad = (Fad) lvwFadeLager.getSelectionModel().getSelectedItem();
+            Controller.addFadTilHylde(fad,hylde,række,lager);
+        } catch (NumberFormatException ex){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Format Error");
+            alert.setHeaderText("Fejl i række eller hylde nummer");
+            alert.show();
+        } catch (IndexOutOfBoundsException ex){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Format Error");
+            alert.setHeaderText("Fejl række eller hylde nr existere ikke");
+            alert.show();
+        } catch (IllegalArgumentException ex){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Format Error");
+            alert.setHeaderText(ex.getMessage());
+            alert.show();
+        }
+
     }
 
     //---------------------------------------------------------------------
@@ -499,6 +540,8 @@ public class MainGuiController {
 
         lvwDestillater.getItems().addAll(Controller.getDestillater());
         lvwDestillatPå.getItems().addAll(Controller.getDestillater());
+
+        lvwLagre.getItems().addAll(Controller.getLagere());
     }
 
 }
