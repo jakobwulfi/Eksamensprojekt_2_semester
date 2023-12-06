@@ -22,10 +22,10 @@ public class Fad implements Serializable {
     }
     // metoder
     public void updateVolumen(double volumen) {
-        if (volumen + NuværendeMængdeLiter > fadStørrelse) {
-            throw new IllegalArgumentException("Mængden er større end fad størrelse");
+        if (volumen > fadStørrelse){
+            throw new IllegalArgumentException("Mængde er Størrer end fadet kan indenholde");
         } else {
-            this.NuværendeMængdeLiter += volumen;
+            this.NuværendeMængdeLiter = volumen;
         }
     }
 

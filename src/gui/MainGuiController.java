@@ -189,7 +189,7 @@ public class MainGuiController {
     private ListView<Lager> lvwLagre;
 
     @FXML
-    private ListView<?> lvwWhiskyer;
+    private ListView<Whisky> lvwWhiskyer;
 
     @FXML
     private AnchorPane pnDestillater;
@@ -531,7 +531,17 @@ public class MainGuiController {
 
     @FXML
     void tilføjWhiskyAction(ActionEvent event) {
-
+        try {
+           List<Fad> fade = lvwFadeWhisky.getSelectionModel().getSelectedItems();
+           double vand  = Double.valueOf(txfVand.getText());
+           Controller.opretWhisky(fade,vand);
+        } catch (NumberFormatException ex){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Format Error");
+            alert.setHeaderText("Fejl i mængde af vand");
+            alert.show();
+        }
     }
 
     //---------------------------------------------------------------------
@@ -583,16 +593,55 @@ public class MainGuiController {
 
     @FXML
     void whiskyInfoAction(MouseEvent event) {
-
+        txaWhiskyInfo.clear();
+        Whisky d = lvwWhiskyer.getSelectionModel().getSelectedItem();
+        txaWhiskyInfo.insertText(0,d.toEtikette());
     }
 
     @FXML
     void opdaterAlkoholProcentAction(ActionEvent event) {
+        try {
+            double alkohol = Double.valueOf(txfAlkoholProcentLager.getText());
+            Fad fad = lvwFadeLager.getSelectionModel().getSelectedItem();
+            if (alkohol > 100|| 0 < alkohol) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initOwner(guiStage.getScene().getWindow());
+                alert.setTitle("Format Error");
+                alert.setHeaderText("Indtast gyldig alkohol procent");
+                alert.show();
+            } else {
+                Controller.opdaterAlkoholProcent(alkohol,fad.getPåfyldning());
+            }
+
+        } catch (NumberFormatException ex){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Format Error");
+            alert.setHeaderText("Indtast gyldig alkohol procent");
+            alert.show();
+        }
 
     }
 
     @FXML
     void opdaterMængdeAction(ActionEvent event) {
+        try {
+            double mængde = Double.valueOf(txfOpdaterMængdeLager.getText());
+            Fad fad = lvwFadeLager.getSelectionModel().getSelectedItem();
+            Controller.opdaterMængdeIFad(fad,mængde);
+        } catch (NumberFormatException ex){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Format Error");
+            alert.setHeaderText("Indtast gyldig mængde væske");
+            alert.show();
+        } catch (IllegalArgumentException ex){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Format Error");
+            alert.setHeaderText(ex.getMessage());
+            alert.show();
+        }
 
     }
 

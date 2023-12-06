@@ -229,7 +229,7 @@ public abstract class Controller {
      * @param fade - fade der er valgt til at blive tømt
      * @return antallet af 0.7 liter flasker, der ville blive lavet ud fra disse fad
      */
-    public double udregnAntalFlasker (List<Fad> fade) {
+    public static double udregnAntalFlasker (List<Fad> fade) {
         double sum = 0;
         for (Fad f : fade) {
             sum += f.getNuværendeMængdeLiter();
@@ -254,4 +254,14 @@ public abstract class Controller {
 
 
         //---------------------------------------------------------------------
+
+    public static void opdaterAlkoholProcent(double alkoholProcent, Påfyldning påfyldning){
+        påfyldning.setAlkoholProcent(alkoholProcent);
     }
+
+    public static void  opdaterMængdeIFad(Fad fad, double mængde){
+        fad.updateVolumen(mængde);
+    }
+
+
+}
