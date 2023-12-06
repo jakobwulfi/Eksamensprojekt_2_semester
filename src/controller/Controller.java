@@ -217,6 +217,13 @@ public abstract class Controller {
         return "Fad ikke fundet i Lageret.";
     }
 
+    public double udregnAntalFlasker () {
+        double sum = 0;
+        for (Fad f : fade) {
+            sum += f.getNuværendeMængdeLiter();
+        }
+        return sum/0.7;
+    }
         //---------------------------------------------------------------------
 
         /**

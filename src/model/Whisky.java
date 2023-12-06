@@ -66,4 +66,8 @@ public class Whisky implements Serializable {
     public String toString() {
         return super.toString();
     }
+    public String toEtikette() {
+        //TODO
+        return null;
+    }
 }
