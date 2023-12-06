@@ -15,6 +15,9 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class MainGuiController {
+
+    @FXML
+    private ImageView imgSall;
     @FXML
     private Button btnOpretDestillat;
 
