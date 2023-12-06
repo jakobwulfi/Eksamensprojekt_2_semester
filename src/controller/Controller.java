@@ -139,23 +139,31 @@ public abstract class Controller {
     //---------------------------------------------------------------------
 
     /**
-     * Opret en nyt Whisky
-     * Pre:
+     * Opret en nyt Whisky ud fra en liste af fad. Fadene bliver "tømt" fuldkommen,
+     * det vil sige, at deres Påfyldning bliver fjernet, og deres nuværeneVolumen bliver
+     * sat til 0.
+     * Pre: De valgte fade har påfyldninger på, ellers bliver der knyttet ligegyldige fade til whiskyen.
+     * @param fade - de fade, der skal tømmes til whisky
      */
-    public static Whisky opretWhisky(String whiskyType, int nummer) {
-        Whisky w = new Whisky(whiskyType, nummer);
+    public static Whisky opretWhisky(List<Fad> fade) {
+        Whisky w = new Whisky(fade);
+        for (Fad f : fade) {
+            f.updateVolumen(0);
+            f.setPåfyldning(null);
+        }
         storage.storeWhisky(w);
         return w;
     }
+
 
     /**
      * Update Whisky.
      * Pre:
      */
+    /*
     public static void updateWhisky(Whisky whisky, String whiskyType, int nummer) {
         whisky.setWhiskyType(whiskyType);
-        whisky.setNummer(nummer);
-    }
+    } */
 
     public static List<Whisky> getWhisker() {
         return storage.getWhiskyer();
@@ -216,6 +224,18 @@ public abstract class Controller {
         return "Fad ikke fundet i Lageret.";
     }
 
+    /**
+     *
+     * @param fade - fade der er valgt til at blive tømt
+     * @return antallet af 0.7 liter flasker, der ville blive lavet ud fra disse fad
+     */
+    public double udregnAntalFlasker (List<Fad> fade) {
+        double sum = 0;
+        for (Fad f : fade) {
+            sum += f.getNuværendeMængdeLiter();
+        }
+        return sum/0.7;
+    }
         //---------------------------------------------------------------------
 
         /**
