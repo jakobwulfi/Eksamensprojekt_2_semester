@@ -145,13 +145,13 @@ public abstract class Controller {
      * Pre: De valgte fade har påfyldninger på, ellers bliver der knyttet ligegyldige fade til whiskyen.
      * @param fade - de fade, der skal tømmes til whisky
      */
-    public static Whisky opretWhisky(List<Fad> fade) {
-        Whisky w = new Whisky(fade);
+    public static Whisky opretWhisky(List<Fad> fade, double vandVolumen) {
+        Whisky w = new Whisky(fade, vandVolumen);
+        storage.storeWhisky(w);
         for (Fad f : fade) {
             f.updateVolumen(0);
             f.setPåfyldning(null);
         }
-        storage.storeWhisky(w);
         return w;
     }
 

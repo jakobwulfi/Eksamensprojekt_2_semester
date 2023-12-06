@@ -9,13 +9,14 @@ public class Whisky implements Serializable {
     private String whiskyType;
     private double antalFlasker;
     private double alkoholProcent;
+    private double vandVolumen;
     //private LocalDate lagringsdDato;
     private LocalDate tapningsDato;
     private List<Destillat> destillater = new ArrayList<>();
     private List<Fad> fade = new ArrayList<>();
 
-    public Whisky(List<Fad> fade) {
-        this.whiskyType = whiskyType;
+    public Whisky(List<Fad> fade, double vandVolumen) {
+        this.vandVolumen = vandVolumen;
         if (fade.size() > 1) {
             this.whiskyType = "Single Malt";
         } else {
@@ -41,7 +42,7 @@ public class Whisky implements Serializable {
         return antalFlasker;
     }
     public void updateAntalFlasker() {
-        double sum = 0;
+        double sum = vandVolumen;
         for (Fad f : fade) {
             sum += f.getNuværendeMængdeLiter();
         }
@@ -49,7 +50,7 @@ public class Whisky implements Serializable {
     }
     private void updateAlkoholProcent() {
         double alkoholVolume = 0;
-        double volume = 0;
+        double volume = vandVolumen;
         for (Fad f : fade) {
             alkoholVolume += (f.getNuværendeMængdeLiter() * (f.getPåfyldning().getAlkoholProcent()));
             volume += f.getNuværendeMængdeLiter();
@@ -113,6 +114,13 @@ public class Whisky implements Serializable {
         }
         etikette += kornsort + "\n" + medarbejder + "\n" + rygemateriale + "\n" + maltBatch + "\n" +
                 "Tapningsdato: " + this.tapningsDato + "\n" + "Alkoholprocent: " + this.alkoholProcent;
+        // vand
+        if (vandVolumen == 0) {
+            etikette += "\nDenne whisky er cask strength.";
+        } else {
+            etikette += "\nDer er blevet anvendt " + vandVolumen + " liter vand fra en dal,\n" +
+                    "der findes under destilleriet.";
+        }
         return etikette;
     }
 }
