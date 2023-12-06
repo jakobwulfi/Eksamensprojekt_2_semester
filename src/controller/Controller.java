@@ -142,20 +142,21 @@ public abstract class Controller {
      * Opret en nyt Whisky
      * Pre:
      */
-    public static Whisky opretWhisky(String whiskyType, int nummer) {
-        Whisky w = new Whisky(whiskyType, nummer);
+    public static Whisky opretWhisky(List<Fad> fade) {
+        Whisky w = new Whisky(fade);
         storage.storeWhisky(w);
         return w;
     }
+
 
     /**
      * Update Whisky.
      * Pre:
      */
+    /*
     public static void updateWhisky(Whisky whisky, String whiskyType, int nummer) {
         whisky.setWhiskyType(whiskyType);
-        whisky.setNummer(nummer);
-    }
+    } */
 
     public static List<Whisky> getWhisker() {
         return storage.getWhiskyer();
