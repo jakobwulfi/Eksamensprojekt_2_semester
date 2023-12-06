@@ -18,6 +18,13 @@ public class MainGuiController {
 
     @FXML
     private ImageView imgSall;
+
+    @FXML
+    private Button btnOpdaterAlkohol;
+
+    @FXML
+    private Button btnOpdaterMængde;
+
     @FXML
     private Button btnOpretDestillat;
 
@@ -61,12 +68,6 @@ public class MainGuiController {
     private Label lblDestillaterTilPåfyldning;
 
     @FXML
-    private Label lblDestillaterWhisky;
-
-    @FXML
-    private Label lblFadInfo;
-
-    @FXML
     private Label lblFadNr;
 
     @FXML
@@ -88,6 +89,9 @@ public class MainGuiController {
     private Label lblFadeWhisky;
 
     @FXML
+    private Label lblHyldeNr;
+
+    @FXML
     private Label lblHylder;
 
     @FXML
@@ -95,9 +99,6 @@ public class MainGuiController {
 
     @FXML
     private Label lblInfoFad;
-
-    @FXML
-    private Label lblKapacitet;
 
     @FXML
     private Label lblKommentar;
@@ -118,13 +119,22 @@ public class MainGuiController {
     private Label lblMedarbejder;
 
     @FXML
+    private Label lblMængdeILiter;
+
+    @FXML
     private Label lblNavn;
 
     @FXML
     private Label lblNewMakeNr;
 
     @FXML
+    private Label lblPlads;
+
+    @FXML
     private Label lblRygeMateriale;
+
+    @FXML
+    private Label lblRækkeNr;
 
     @FXML
     private Label lblRækker;
@@ -137,6 +147,12 @@ public class MainGuiController {
 
     @FXML
     private Label lblStartVolume;
+
+    @FXML
+    private Label lblVand;
+
+    @FXML
+    private Label lblWhiskyInfo;
 
     @FXML
     private Label lblWhiskyer;
@@ -215,10 +231,16 @@ public class MainGuiController {
     private TextArea txaInfoFad;
 
     @FXML
+    private TextArea txaWhiskyInfo;
+
+    @FXML
     private TextField txfAdresse;
 
     @FXML
     private TextField txfAlkoholProcent;
+
+    @FXML
+    private TextField txfVand;
 
     @FXML
     private TextField txfFadNr;
@@ -267,6 +289,12 @@ public class MainGuiController {
 
     @FXML
     private TextField txfRækkeNr;
+
+    @FXML
+    private TextField txfAlkoholProcentLager;
+
+    @FXML
+    private TextField txfOpdaterMængdeLager;
 
     @FXML
     private TextField txfRækker;
@@ -503,8 +531,7 @@ public class MainGuiController {
 
     @FXML
     void tilføjWhiskyAction(ActionEvent event) {
-        Whisky whisky = (Whisky) lvwWhiskyer.getSelectionModel().getSelectedItem();
-        // mangler whisky add metode?
+
     }
 
     //---------------------------------------------------------------------
@@ -551,6 +578,22 @@ public class MainGuiController {
         lvwDestillatPå.getItems().addAll(Controller.getDestillater());
 
         lvwLagre.getItems().addAll(Controller.getLagere());
+    }
+
+
+    @FXML
+    void whiskyInfoAction(MouseEvent event) {
+
+    }
+
+    @FXML
+    void opdaterAlkoholProcentAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void opdaterMængdeAction(ActionEvent event) {
+
     }
 
 }
