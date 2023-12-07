@@ -53,7 +53,7 @@ public class Whisky implements Serializable {
         double alkoholVolume = 0;
         double volume = vandVolumen;
         for (Fad f : fade) {
-            alkoholVolume += (f.getNuværendeMængdeLiter() * (f.getPåfyldning().getAlkoholProcent()));
+            alkoholVolume += (f.getNuværendeMængdeLiter() * (f.getPåfyldning().getAlkoholProcent() / 100));
             volume += f.getNuværendeMængdeLiter();
         }
         this.alkoholProcent = (alkoholVolume/volume)* 100;
