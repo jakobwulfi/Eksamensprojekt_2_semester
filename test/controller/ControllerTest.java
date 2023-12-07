@@ -98,6 +98,8 @@ class ControllerTest {
 
     }
 
+    //---------------------------------------------------------------------
+
     @Test
     void treAarGammel() {
         //Arrange
@@ -105,16 +107,12 @@ class ControllerTest {
         Destillat nm1 = Controller.opretDestillat("Blended", "Bygsort", "Lars", 40, null, "Nice", "nm1",
                 LocalDate.of(2023,12,1), LocalDate.of(2026,12,2), 10);
         DestillatTilPåfyldning d1 = Controller.opretDestillatTilPåfyldning(nm1, 10);
-
-        Påfyldning påfyldning = Controller.opretPåfyldning(List.of(d1), fad, LocalDate.of(2023, 12, 06), "Lars");
+        Påfyldning påfyldning = Controller.opretPåfyldning(List.of(d1), fad, LocalDate.of(2019, 12, 06), "Lars");
 
         //Act
         List<Fad> result = Controller.TreAarGammel();
 
         //Assert
         assertEquals(1, result.size());
-
-
-
     }
 }
