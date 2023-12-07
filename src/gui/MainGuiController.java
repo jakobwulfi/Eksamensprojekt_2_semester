@@ -158,7 +158,7 @@ public class MainGuiController {
     private Label lblWhiskyer;
 
     @FXML
-    private ComboBox<?> lstLager;
+    private ComboBox<Lager> lstLager;
 
     @FXML
     private ListView<Destillat> lvwDestillatPå;
@@ -339,10 +339,12 @@ public class MainGuiController {
                 alert.setHeaderText("Start dato skal være før slut dato.");
                 alert.show();
             } else {
+                System.out.println("making alcohol");
                 Destillat d = Controller.opretDestillat(txfMaltBatch.getText(), txfKornsort.getText(), txfMedarbejder.getText(),
                         Double.valueOf(txfAlkoholProcent.getText()), txfRygeMateriale.getText(), txfKommentar.getText(),
                         txfNewMakeNr.getText(), LocalDate.parse(txfStartDato.getText()), LocalDate.parse(txfSlutDato.getText()),
                         Double.valueOf(txfStartVolume.getText()));
+                System.out.println("done");
                 lvwDestillater.getItems().add(d);
                 lvwDestillatPå.getItems().add(d);
                 txfMaltBatch.clear();
@@ -385,7 +387,6 @@ public class MainGuiController {
             Fad f = Controller.opretFad(txfFadOprindelse.getText(), txfFadType.getText(), fadNr, fadStørrelse);
             lvwFade.getItems().add(f);
             lvwFadPå.getItems().add(f);
-            lvwFadeWhisky.getItems().add(f);
             lvwFadeLager.getItems().add(f);
             txfFadNr.clear();
             txfFadStørrelse.clear();
@@ -421,6 +422,7 @@ public class MainGuiController {
             } else {
                 Lager l = Controller.opretLager(adresse, navn, rækker, hylder,pladsHylde);
                 lvwLagre.getItems().add(l);
+                lstLager.getItems().add(l);
             }
         } catch (NullPointerException ex) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -446,7 +448,6 @@ public class MainGuiController {
             Fad fad = lvwFadPå.getSelectionModel().getSelectedItem(); // måske ikke korrekt
             LocalDate startDato = LocalDate.parse(txfStartDatoPåfyld.getText());
             String medarbejder = txfMedarbejder.getText();
-            LocalDate slutDato = LocalDate.parse(txfSlutDatoPåfyld.getText());
             for (DestillatTilPåfyldning destillatTilPåfyldning : destillat){
                 if (startDato.isBefore(destillatTilPåfyldning.getDestillat().getSlutDato())){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -457,21 +458,15 @@ public class MainGuiController {
                 }
             }
 
-            if (startDato.isAfter(slutDato))
-            {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.initOwner(guiStage.getScene().getWindow());
-                alert.setTitle("Date Error");
-                alert.setHeaderText("Start dato skal være før slut dato.");
-                alert.show();
-            } else if (medarbejder.equals(null)) {
+            if (medarbejder.equals(null)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.initOwner(guiStage.getScene().getWindow());
                 alert.setTitle("Indtastnings Fejl");
                 alert.setHeaderText("Indtast venlist en medarbejder");
                 alert.show();
             } else {
-                Controller.opretPåfyldning(destillat, fad, startDato, medarbejder, slutDato);
+                Controller.opretPåfyldning(destillat, fad, startDato, medarbejder);
+                lvwFadeWhisky.getItems().add(fad);
             }
         } catch (NullPointerException ex) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -581,13 +576,25 @@ public class MainGuiController {
 
         lvwFade.getItems().addAll(Controller.getFade());
         lvwFadeLager.getItems().addAll(Controller.getFade());
-        lvwFadPå.getItems().addAll(Controller.getFade());
-        lvwFadeWhisky.getItems().addAll(Controller.getFade());
+
+
+        for (Fad fad : Controller.getFade()){
+            if (fad.getNuværendeMængdeLiter() > 0 ){
+                lvwFadeWhisky.getItems().add(fad);
+            }
+        }
 
         lvwDestillater.getItems().addAll(Controller.getDestillater());
-        lvwDestillatPå.getItems().addAll(Controller.getDestillater());
+
+        for (Destillat destillat : Controller.getDestillater()){
+            if (destillat.getMængdeLiter() > 0){
+                lvwDestillatPå.getItems().add(destillat);
+            }
+        }
 
         lvwLagre.getItems().addAll(Controller.getLagere());
+
+        lstLager.getItems().addAll(Controller.getLagere());
     }
 
 
@@ -603,7 +610,7 @@ public class MainGuiController {
         try {
             double alkohol = Double.valueOf(txfAlkoholProcentLager.getText());
             Fad fad = lvwFadeLager.getSelectionModel().getSelectedItem();
-            if (alkohol > 100|| 0 < alkohol) {
+            if (alkohol > 100|| 0 > alkohol) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.initOwner(guiStage.getScene().getWindow());
                 alert.setTitle("Format Error");
@@ -611,6 +618,7 @@ public class MainGuiController {
                 alert.show();
             } else {
                 Controller.opdaterAlkoholProcent(alkohol,fad.getPåfyldning());
+                txfAlkoholProcentLager.clear();
             }
 
         } catch (NumberFormatException ex){
@@ -629,6 +637,7 @@ public class MainGuiController {
             double mængde = Double.valueOf(txfOpdaterMængdeLager.getText());
             Fad fad = lvwFadeLager.getSelectionModel().getSelectedItem();
             Controller.opdaterMængdeIFad(fad,mængde);
+            txfOpdaterMængdeLager.clear();
         } catch (NumberFormatException ex){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.initOwner(guiStage.getScene().getWindow());
@@ -643,6 +652,23 @@ public class MainGuiController {
             alert.show();
         }
 
+    }
+
+    @FXML
+    void lagerInfoAction(ActionEvent event) {
+        Lager lager = lstLager.getSelectionModel().getSelectedItem();
+        lvwFadPå.getItems().clear();
+        for (Række række : lager.getRækker()){
+            for (Hylde hylde : række.getHylder()){
+                if (!hylde.getFade().isEmpty()){
+                    for (Fad fad : hylde.getFade()){
+                        if (fad.getNuværendeMængdeLiter() < fad.getFadStørrelse())
+                        lvwFadPå.getItems().add(fad);
+                    }
+                }
+
+            }
+        }
     }
 
 }

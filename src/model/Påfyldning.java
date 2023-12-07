@@ -10,13 +10,11 @@ public class Påfyldning implements Serializable {
     private String medarbejder;
     private double alkoholProcentStart;
     private double alkoholProcentNu;
-    private LocalDate slutDato;
 
-    public Påfyldning(List<DestillatTilPåfyldning> destillater,  LocalDate startDato, String medarbejder,  LocalDate slutDato) {
+    public Påfyldning(List<DestillatTilPåfyldning> destillater,  LocalDate startDato, String medarbejder) {
         this.destillater = destillater;
         this.startDato = startDato;
         this.medarbejder = medarbejder;
-        this.slutDato = slutDato;
         beregnStartProcent();
     }
     // metoder
@@ -58,12 +56,6 @@ public class Påfyldning implements Serializable {
     }
     public void setAlkoholProcent(double alkoholProcent) {
         this.alkoholProcentNu = alkoholProcent;
-    }
-    public LocalDate getSlutDato() {
-        return slutDato;
-    }
-    public void setSlutDato(LocalDate slutDato) {
-        this.slutDato = slutDato;
     }
 
     @Override
