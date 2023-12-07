@@ -222,9 +222,6 @@ public class MainGuiController {
     private Tab tabWhisky;
 
     @FXML
-    private TextArea txaFadInfo;
-
-    @FXML
     private TextArea txaInfoDestillat;
 
     @FXML
@@ -701,5 +698,24 @@ public class MainGuiController {
             }
         }
     }
+
+    @FXML
+    void fadInfoAction(MouseEvent event) {
+        try {
+            txaInfoFad.clear();
+            Fad f = lvwFade.getSelectionModel().getSelectedItem();
+            txaInfoFad.insertText(0,f.toString());
+        } catch (NullPointerException ex){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Null point exception");
+            alert.setHeaderText("Du har ikke valgt et fad");
+            alert.show();
+        }
+
+    }
+
+
+
 
 }

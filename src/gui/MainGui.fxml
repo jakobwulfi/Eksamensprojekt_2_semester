@@ -18,7 +18,7 @@
       <content>
         <AnchorPane fx:id="pnFade" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <ListView fx:id="lvwFade" layoutX="59.0" layoutY="28.0" prefHeight="184.0" prefWidth="226.0" />
+                  <ListView fx:id="lvwFade" layoutX="59.0" layoutY="28.0" onMouseClicked="#fadInfoAction" prefHeight="184.0" prefWidth="226.0" />
                   <Button fx:id="btnOpretFad" layoutX="372.0" layoutY="212.0" mnemonicParsing="false" onAction="#opretFadAction" text="Opret Fad" />
                   <TextField fx:id="txfFadOprindelse" layoutX="388.0" layoutY="30.0" promptText="Frankrig" />
                   <TextField fx:id="txfFadType" layoutX="388.0" layoutY="72.0" promptText="Sherry" />
@@ -84,7 +84,7 @@
                   <Button fx:id="btnOpretPåfyldning" layoutX="25.0" layoutY="488.0" mnemonicParsing="false" onAction="#opretPåfyldningAction" text="Opret påfyldning" />
                   <ListView fx:id="lvwFadPå" layoutX="395.0" layoutY="351.0" prefHeight="146.0" prefWidth="200.0" />
                   <ListView fx:id="lvwDestillatPå" layoutX="395.0" layoutY="58.0" prefHeight="183.0" prefWidth="200.0" />
-                  <ComboBox fx:id="lstLager" layoutX="455.0" layoutY="272.0" onAction="#lagerInfoAction" prefWidth="150.0" />
+                  <ComboBox fx:id="lstLager" layoutX="455.0" layoutY="272.0" prefWidth="150.0" />
                   <Label fx:id="lblLager" layoutX="392.0" layoutY="276.0" text="Lager:" />
                   <TextField fx:id="txfVolumen" layoutX="108.0" layoutY="58.0" />
                   <Label layoutX="38.0" layoutY="62.0" text="Volumen:" />
