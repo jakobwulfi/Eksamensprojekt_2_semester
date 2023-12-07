@@ -59,8 +59,7 @@ class ControllerTest {
         DestillatTilPåfyldning d1 = Controller.opretDestillatTilPåfyldning(nm1, 10);
         DestillatTilPåfyldning d2 = Controller.opretDestillatTilPåfyldning(nm2, 15);
 
-        Påfyldning påfyldning = Controller.opretPåfyldning(List.of(d1, d2), f, LocalDate.of(2023, 12, 06), "Lars",
-                LocalDate.of(2026, 12, 04));
+        Påfyldning påfyldning = Controller.opretPåfyldning(List.of(d1, d2), f, LocalDate.of(2023, 12, 06), "Lars");
 
         //Assert
         assertEquals(52, påfyldning.getAlkoholProcent());
