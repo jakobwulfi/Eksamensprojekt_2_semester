@@ -46,7 +46,7 @@ public class Whisky implements Serializable {
         for (Fad f : fade) {
             sum += f.getNuværendeMængdeLiter();
         }
-        this.antalFlasker = sum/0.7;
+        this.antalFlasker = sum * (1/0.7);
     }
     private void updateAlkoholProcent() {
         double alkoholVolume = 0;

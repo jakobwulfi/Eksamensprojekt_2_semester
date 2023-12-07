@@ -423,6 +423,11 @@ public class MainGuiController {
                 Lager l = Controller.opretLager(adresse, navn, rækker, hylder,pladsHylde);
                 lvwLagre.getItems().add(l);
                 lstLager.getItems().add(l);
+                txfRækker.clear();
+                txfHylder.clear();
+                txfHylde.clear();
+                txfAdresse.clear();
+                txfNavn.clear();
             }
         } catch (NullPointerException ex) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -529,7 +534,8 @@ public class MainGuiController {
         try {
            List<Fad> fade = lvwFadeWhisky.getSelectionModel().getSelectedItems();
            double vand  = Double.valueOf(txfVand.getText());
-           Controller.opretWhisky(fade,vand);
+           Whisky w = Controller.opretWhisky(fade,vand);
+           lvwWhiskyer.getItems().add(w);
         } catch (NumberFormatException ex){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.initOwner(guiStage.getScene().getWindow());
@@ -567,9 +573,18 @@ public class MainGuiController {
 
     @FXML
     void showInfoDestillat(MouseEvent event) {
-        txaInfoDestillat.clear();
-       Destillat d = lvwDestillater.getSelectionModel().getSelectedItem();
-       txaInfoDestillat.insertText(0,d.destillatInfo());
+        try {
+            txaInfoDestillat.clear();
+            Destillat d = lvwDestillater.getSelectionModel().getSelectedItem();
+            txaInfoDestillat.insertText(0,d.destillatInfo());
+        } catch (NullPointerException ex){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Null point exception");
+            alert.setHeaderText("Du har ikke valgt et destillat");
+            alert.show();
+        }
+
     }
 
     public void initialize() {
@@ -600,9 +615,18 @@ public class MainGuiController {
 
     @FXML
     void whiskyInfoAction(MouseEvent event) {
-        txaWhiskyInfo.clear();
-        Whisky d = lvwWhiskyer.getSelectionModel().getSelectedItem();
-        txaWhiskyInfo.insertText(0,d.toEtikette());
+        try {
+            txaWhiskyInfo.clear();
+            Whisky d = lvwWhiskyer.getSelectionModel().getSelectedItem();
+            txaWhiskyInfo.insertText(0,d.toEtikette());
+        } catch (NullPointerException ex){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Null point exception");
+            alert.setHeaderText("Du har ikke valgt en whisky");
+            alert.show();
+        }
+
     }
 
     @FXML
@@ -638,6 +662,11 @@ public class MainGuiController {
             Fad fad = lvwFadeLager.getSelectionModel().getSelectedItem();
             Controller.opdaterMængdeIFad(fad,mængde);
             txfOpdaterMængdeLager.clear();
+
+            lvwFade.getItems().clear();
+            lvwFade.getItems().addAll(Controller.getFade());
+
+
         } catch (NumberFormatException ex){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.initOwner(guiStage.getScene().getWindow());
