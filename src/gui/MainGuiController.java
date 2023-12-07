@@ -339,12 +339,10 @@ public class MainGuiController {
                 alert.setHeaderText("Start dato skal være før slut dato.");
                 alert.show();
             } else {
-                System.out.println("making alcohol");
                 Destillat d = Controller.opretDestillat(txfMaltBatch.getText(), txfKornsort.getText(), txfMedarbejder.getText(),
                         Double.valueOf(txfAlkoholProcent.getText()), txfRygeMateriale.getText(), txfKommentar.getText(),
                         txfNewMakeNr.getText(), LocalDate.parse(txfStartDato.getText()), LocalDate.parse(txfSlutDato.getText()),
                         Double.valueOf(txfStartVolume.getText()));
-                System.out.println("done");
                 lvwDestillater.getItems().add(d);
                 lvwDestillatPå.getItems().add(d);
                 txfMaltBatch.clear();
@@ -610,6 +608,8 @@ public class MainGuiController {
         lvwLagre.getItems().addAll(Controller.getLagere());
 
         lstLager.getItems().addAll(Controller.getLagere());
+
+        lvwWhiskyer.getItems().addAll(Controller.getWhisker());
     }
 
 
