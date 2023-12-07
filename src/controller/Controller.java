@@ -189,6 +189,9 @@ public abstract class Controller {
             Påfyldning p = new Påfyldning(destillater, startDato, medarbejder);
             fad.setPåfyldning(p);
             fad.updateVolumen(volumen);
+            for (DestillatTilPåfyldning  destillat : destillater){
+                destillat.getDestillat().setMængdeLiter(destillat.getMængdeLiter() - destillat.getMængdeLiter());
+            }
             return p;
         }
     }
@@ -202,7 +205,6 @@ public abstract class Controller {
             throw new IllegalArgumentException("Mængden af væske til påfyldning er større end mængden der er tilbage af destillatet");
         }
         DestillatTilPåfyldning d = new DestillatTilPåfyldning(destillat, mængdeLiter, destillat.getAlkoholProcent());
-        destillat.setMængdeLiter(destillat.getMængdeLiter() - mængdeLiter);
         return d;
     }
 
