@@ -106,8 +106,7 @@ class ControllerTest {
                 LocalDate.of(2023,12,1), LocalDate.of(2026,12,2), 10);
         DestillatTilPåfyldning d1 = Controller.opretDestillatTilPåfyldning(nm1, 10);
 
-        Påfyldning påfyldning = Controller.opretPåfyldning(List.of(d1), fad, LocalDate.of(2023, 12, 06), "Lars",
-                LocalDate.of(2026, 12, 07));
+        Påfyldning påfyldning = Controller.opretPåfyldning(List.of(d1), fad, LocalDate.of(2023, 12, 06), "Lars");
 
         //Act
         List<Fad> result = Controller.TreAarGammel();
