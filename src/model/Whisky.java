@@ -69,7 +69,13 @@ public class Whisky implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString();
+        String malt = "";
+        for (Destillat d : destillater) {
+            if (!malt.contains(d.getMaltBatch())) {
+                malt += d.getMaltBatch() + " ";
+            }
+        }
+        return "Type: " + this.whiskyType + ", malt: " + malt + ", antal flasker: " + this.antalFlasker;
     }
 
     /**
