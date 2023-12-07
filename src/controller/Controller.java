@@ -152,6 +152,7 @@ public abstract class Controller {
         for (Fad f : fade) {
             f.updateVolumen(0);
             f.setPåfyldning(null);
+            f.setFillNr(f.getFillNr() + 1);
         }
         return w;
     }
@@ -177,7 +178,7 @@ public abstract class Controller {
      * Pre:
      */
     public static Påfyldning opretPåfyldning(List<DestillatTilPåfyldning> destillater, Fad fad, LocalDate startDato,
-                                             String medarbejder, LocalDate slutDato) {
+                                             String medarbejder) {
         double volumen = 0;
         for (DestillatTilPåfyldning destillatTilPåfyldning : destillater) {
             volumen += destillatTilPåfyldning.getMængdeLiter();
@@ -185,7 +186,7 @@ public abstract class Controller {
         if (volumen > fad.getFadStørrelse()) {
             throw new IllegalArgumentException("Påfyldning for stor til fad");
         } else {
-            Påfyldning p = new Påfyldning(destillater, startDato, medarbejder, slutDato);
+            Påfyldning p = new Påfyldning(destillater, startDato, medarbejder);
             fad.setPåfyldning(p);
             return p;
         }
@@ -196,7 +197,7 @@ public abstract class Controller {
      */
 
     public static DestillatTilPåfyldning opretDestillatTilPåfyldning(Destillat destillat, double mængdeLiter) {
-        if (destillat.getMængdeLiter() - mængdeLiter < 0) {
+        if ((destillat.getMængdeLiter() - mængdeLiter) < 0) {
             throw new IllegalArgumentException("Mængden af væske til påfyldning er større end mængden der er tilbage af destillatet");
         }
         DestillatTilPåfyldning d = new DestillatTilPåfyldning(destillat, mængdeLiter, destillat.getAlkoholProcent());
@@ -230,7 +231,7 @@ public abstract class Controller {
      * @param fade - fade der er valgt til at blive tømt
      * @return antallet af 0.7 liter flasker, der ville blive lavet ud fra disse fad
      */
-    public double udregnAntalFlasker (List<Fad> fade) {
+    public static double udregnAntalFlasker (List<Fad> fade) {
         double sum = 0;
         for (Fad f : fade) {
             sum += f.getNuværendeMængdeLiter();
@@ -254,7 +255,7 @@ public abstract class Controller {
         }
         return TreAarGammel;
     }
-}
+
 
         /**
          * Update Påfyldning.
@@ -272,3 +273,14 @@ public abstract class Controller {
 
 
         //---------------------------------------------------------------------
+
+    public static void opdaterAlkoholProcent(double alkoholProcent, Påfyldning påfyldning){
+        påfyldning.setAlkoholProcent(alkoholProcent);
+    }
+
+    public static void  opdaterMængdeIFad(Fad fad, double mængde){
+        fad.updateVolumen(mængde);
+    }
+
+
+}

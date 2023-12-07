@@ -186,8 +186,7 @@ class FadTest {
         destillaterTilPåfyldninger.add(destillatTilPåfyldning);
 
 
-        Påfyldning Påfyldning = new Påfyldning(destillaterTilPåfyldninger, LocalDate.of(2023, 12, 06), "Lars",
-                LocalDate.of(2026, 12, 04));
+        Påfyldning Påfyldning = new Påfyldning(destillaterTilPåfyldninger, LocalDate.of(2023, 12, 06), "Lars");
         fad.setPåfyldning(Påfyldning);
 
         // Act
@@ -223,8 +222,7 @@ class FadTest {
         DestillatTilPåfyldning destillatTilPåfyldning = new DestillatTilPåfyldning(destillat,40, 10);
         List<DestillatTilPåfyldning> destillaterTilPåfyldninger = new ArrayList<>();
         destillaterTilPåfyldninger.add(destillatTilPåfyldning);
-        Påfyldning påfyldning = new Påfyldning(destillaterTilPåfyldninger, LocalDate.of(2023, 12, 06), "Lars",
-                LocalDate.of(2026, 12, 04));
+        Påfyldning påfyldning = new Påfyldning(destillaterTilPåfyldninger, LocalDate.of(2023, 12, 06), "Lars");
 
         // Act
         fad.setPåfyldning(påfyldning);
