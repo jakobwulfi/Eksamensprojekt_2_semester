@@ -227,18 +227,6 @@ public abstract class Controller {
         return "Fad ikke fundet i Lageret.";
     }
 
-    /**
-     *
-     * @param fade - fade der er valgt til at blive tømt
-     * @return antallet af 0.7 liter flasker, der ville blive lavet ud fra disse fad
-     */
-    public static double udregnAntalFlasker (List<Fad> fade) {
-        double sum = 0;
-        for (Fad f : fade) {
-            sum += f.getNuværendeMængdeLiter();
-        }
-        return sum/0.7;
-    }
         //---------------------------------------------------------------------
 
     /**

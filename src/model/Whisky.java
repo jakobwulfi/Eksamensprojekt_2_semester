@@ -47,7 +47,7 @@ public class Whisky implements Serializable {
         for (Fad f : fade) {
             sum += f.getNuværendeMængdeLiter();
         }
-        this.antalFlasker = sum * (1/0.7);
+        this.antalFlasker = sum /0.7;
     }
     private void updateAlkoholProcent() {
         double alkoholVolume = 0;
@@ -92,10 +92,10 @@ public class Whisky implements Serializable {
         String fadeType = "Fade Typer: ";
         for (Fad f : fade) {
             if (!fadeFra.contains(f.getFadFra())) {
-                fadeFra += f.getFadFra() + " ";
+                fadeFra += f.getFadFra() + ", ";
             }
             if (!fadeType.contains(f.getFadType())) {
-                fadeType += f.getFadType() + " ";
+                fadeType += f.getFadType() + ", ";
             }
         }
         etikette += fadeFra + "\n" + fadeType + "\n";
@@ -107,16 +107,16 @@ public class Whisky implements Serializable {
         String maltBatch = "Malt anvendt: ";
         for (Destillat d : destillater) {
             if (!kornsort.contains(d.getKornsort())) {
-                kornsort += d.getKornsort() + " ";
+                kornsort += d.getKornsort() + ", ";
             }
             if (!medarbejder.contains(d.getMedarbejder())) {
-                medarbejder += d.getMedarbejder() + " ";
+                medarbejder += d.getMedarbejder() + ", ";
             }
             if (!rygemateriale.contains(d.getRygeMateriale())) {
-                rygemateriale += d.getRygeMateriale() + " ";
+                rygemateriale += d.getRygeMateriale() + ", ";
             }
             if (!maltBatch.contains(d.getMaltBatch())) {
-                maltBatch += d.getMaltBatch() + " ";
+                maltBatch += d.getMaltBatch() + ", ";
             }
         }
         etikette += kornsort + "\n" + medarbejder + "\n" + rygemateriale + "\n" + maltBatch + "\n" +

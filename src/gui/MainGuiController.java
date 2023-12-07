@@ -447,7 +447,7 @@ public class MainGuiController {
     @FXML
     void opretPåfyldningAction(ActionEvent event) {
         try {
-            List<DestillatTilPåfyldning> destillat = lvwDestillaterTilPåfyldning.getItems();
+            List<DestillatTilPåfyldning> destillat = lvwDestillaterTilPåfyldning.getSelectionModel().getSelectedItems();
             Fad fad = lvwFadPå.getSelectionModel().getSelectedItem(); // måske ikke korrekt
             LocalDate startDato = LocalDate.parse(txfStartDatoPåfyld.getText());
             String medarbejder = txfMedarbejder.getText();
