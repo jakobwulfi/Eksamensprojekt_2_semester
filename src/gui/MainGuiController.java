@@ -468,9 +468,14 @@ public class MainGuiController {
                 alert.setHeaderText("Indtast venlist en medarbejder");
                 alert.show();
             } else {
-                Controller.opretPåfyldning(destillat, fad, startDato, medarbejder);
-                lvwFadeWhisky.getItems().add(fad);
-                lvwDestillaterTilPåfyldning.getItems().clear();
+                Påfyldning p = Controller.opretPåfyldning(destillat, fad, startDato, medarbejder);
+                if (p.getStartDato().plusYears(3).isBefore(LocalDate.now())){
+                    lvwFadeWhisky.getItems().add(fad);
+                    lvwDestillaterTilPåfyldning.getItems().clear();
+                } else {
+                    lvwDestillaterTilPåfyldning.getItems().clear();
+                }
+
             }
         } catch (NullPointerException ex) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -549,7 +554,7 @@ public class MainGuiController {
     @FXML
     void opretDestillatTilPåfyldningAction(ActionEvent event) {
         try {
-            Destillat destillat = lvwDestillater.getSelectionModel().getSelectedItem();
+            Destillat destillat = lvwDestillatPå.getSelectionModel().getSelectedItem();
             double mængdeLiter = Double.valueOf(txfVolumen.getText());
             DestillatTilPåfyldning d = Controller.opretDestillatTilPåfyldning(destillat,mængdeLiter);
             lvwDestillaterTilPåfyldning.getItems().add(d);

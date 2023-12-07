@@ -88,7 +88,7 @@ public class Whisky implements Serializable {
 
         // Fade info
         String fadeFra = "Fade fra: ";
-        String fadeType = "Fade fra: ";
+        String fadeType = "Fade Typer: ";
         for (Fad f : fade) {
             if (!fadeFra.contains(f.getFadFra())) {
                 fadeFra += f.getFadFra() + " ";

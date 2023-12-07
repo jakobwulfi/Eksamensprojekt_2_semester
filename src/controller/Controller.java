@@ -188,6 +188,7 @@ public abstract class Controller {
         } else {
             Påfyldning p = new Påfyldning(destillater, startDato, medarbejder);
             fad.setPåfyldning(p);
+            fad.updateVolumen(volumen);
             return p;
         }
     }
@@ -247,11 +248,16 @@ public abstract class Controller {
     public static List<Fad> TreAarGammel() {
         List<Fad> TreAarGammel = new ArrayList<>();
         for (Fad f : Controller.getFade()) {
-            if (f.getPåfyldning().getStartDato().plusYears(3).isBefore(LocalDate.now())) {
-                TreAarGammel.add(f);
-            } else {
-                System.out.println("Startdatoen er ikke ældre end 3 år.");
+            try {
+                if (f.getPåfyldning().getStartDato().plusYears(3).isBefore(LocalDate.now())) {
+                    TreAarGammel.add(f);
+                } else {
+                    System.out.println("Startdatoen er ikke ældre end 3 år.");
+                }
+            } catch(NullPointerException ex){
+
             }
+
         }
         return TreAarGammel;
     }
