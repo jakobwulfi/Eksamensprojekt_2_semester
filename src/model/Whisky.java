@@ -22,7 +22,8 @@ public class Whisky implements Serializable {
         } else {
             this.whiskyType = "Single Cask";
         }
-        for (Fad f : fade) {
+        this.fade = fade;
+        for (Fad f : this.fade) {
             for (DestillatTilPåfyldning dtp : f.getPåfyldning().getDestillat()) {
                 destillater.add(dtp.getDestillat());
             }
