@@ -470,6 +470,7 @@ public class MainGuiController {
             } else {
                 Controller.opretPåfyldning(destillat, fad, startDato, medarbejder);
                 lvwFadeWhisky.getItems().add(fad);
+                lvwDestillaterTilPåfyldning.getItems().clear();
             }
         } catch (NullPointerException ex) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -591,11 +592,7 @@ public class MainGuiController {
         lvwFadeLager.getItems().addAll(Controller.getFade());
 
 
-        for (Fad fad : Controller.getFade()){
-            if (fad.getNuværendeMængdeLiter() > 0 ){
-                lvwFadeWhisky.getItems().add(fad);
-            }
-        }
+        lvwFadeWhisky.getItems().addAll(Controller.TreAarGammel());
 
         lvwDestillater.getItems().addAll(Controller.getDestillater());
 
