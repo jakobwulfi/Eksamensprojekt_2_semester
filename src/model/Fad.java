@@ -73,7 +73,11 @@ public class Fad implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("Oprindelses land: %s. Fad type: %s. Fadstørrelse i liter: %f. Fill nr: %d. Fad nr: %d"
+        return String.format("Fad nr: %d, Fill nr: %d, \nFad type: %s",fadNr, fillNr, fadType);
+    }
+
+    public String toStringLong(){
+        return String.format("Oprindelses land: %s. \nFad type: %s. \nFadstørrelse i liter: %.2f. \nFill nr: %d. \nFad nr: %d"
                 ,fadFra,fadType,fadStørrelse,fillNr, fadNr);
     }
 }
