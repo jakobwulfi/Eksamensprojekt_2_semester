@@ -177,9 +177,6 @@ public class MainGuiController {
     private ListView<DestillatTilPåfyldning> lvwDestillaterTilPåfyldning;
 
     @FXML
-    private ListView<?> lvwDestillaterWhisky;
-
-    @FXML
     private ListView<Fad> lvwFadPå;
 
     @FXML
@@ -299,8 +296,6 @@ public class MainGuiController {
     @FXML
     private TextField txfSlutDato;
 
-    @FXML
-    private TextField txfSlutDatoPåfyld;
 
     @FXML
     private TextField txfStartDato;
@@ -506,6 +501,8 @@ public class MainGuiController {
 
             Fad fad = (Fad) lvwFadeLager.getSelectionModel().getSelectedItem();
             Controller.addFadTilHylde(fad,hylde,række,lager);
+            txfRækkeNr.clear();
+            txfHyldeNr.clear();
         } catch (NumberFormatException ex){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.initOwner(guiStage.getScene().getWindow());
@@ -551,6 +548,18 @@ public class MainGuiController {
     @FXML
     void opretDestillatTilPåfyldningAction(ActionEvent event) {
         try {
+            for (DestillatTilPåfyldning destillat : lvwDestillaterTilPåfyldning.getItems()){
+                if (destillat.getDestillat().getNewMakeNr().equals(lvwDestillater.getSelectionModel().getSelectedItem().getNewMakeNr())){
+                    double d = Double.valueOf(txfVolumen.getText());
+                    if ((destillat.getDestillat().getMængdeLiter()-(destillat.getMængdeLiter() + d) < 0)){
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.initOwner(guiStage.getScene().getWindow());
+                        alert.setTitle("Format Error");
+                        alert.setHeaderText("Der er ikke nok af det valgte destillat");
+                        alert.show();
+                    }
+                }
+            }
             Destillat destillat = lvwDestillatPå.getSelectionModel().getSelectedItem();
             double mængdeLiter = Double.valueOf(txfVolumen.getText());
             DestillatTilPåfyldning d = Controller.opretDestillatTilPåfyldning(destillat,mængdeLiter);
@@ -696,8 +705,8 @@ public class MainGuiController {
                 }
 
             }
+            }
         }
-    }
 
     @FXML
     void fadInfoAction(MouseEvent event) {
@@ -715,7 +724,69 @@ public class MainGuiController {
 
     }
 
+/*
+    @FXML
+    void updateDestilleringer(ActionEvent event) {
+        txfMaltBatch.clear();
+        txfKornsort.clear();
+        txfMedarbejder.clear();
+        txfAlkoholProcent.clear();
+        txfRygeMateriale.clear();
+        txfKommentar.clear();
+        txfNewMakeNr.clear();
+        txfStartDato.clear();
+        txfSlutDato.clear();
+        txfStartVolume.clear();
+        lvwDestillater.getSelectionModel().clearSelection();
+    }
 
+    @FXML
+    void updateFade(ActionEvent event) {
+        txfFadOprindelse.clear();
+        txfFadType.clear();
+        txfFadStørrelse.clear();
+        txfFadNr.clear();
+        lvwFade.getSelectionModel().clearSelection();
+
+    }
+
+    @FXML
+    void updateLager(ActionEvent event) {
+        txfRækker.clear();
+        txfHylder.clear();
+        txfHylde.clear();
+        txfAdresse.clear();
+        txfNavn.clear();
+        txfRækkeNr.clear();
+        txfHyldeNr.clear();
+        txfOpdaterMængdeLager.clear();
+        txfAlkoholProcentLager.clear();
+        lvwLagre.getSelectionModel().clearSelection();
+        lvwFadeLager.getSelectionModel().clearSelection();
+
+    }
+
+    @FXML
+    void updatePåfyldning(ActionEvent event) {
+        txfVolumen.clear();
+        txfStartDatoPåfyld.clear();
+        txfMedarbejderPå.clear();
+        lvwDestillaterTilPåfyldning.getItems().clear();
+        lvwDestillatPå.getSelectionModel().clearSelection();
+        lstLager.getSelectionModel().clearSelection();
+        lvwFadPå.getSelectionModel().clearSelection();
+
+    }
+
+    @FXML
+    void updateWhisky(ActionEvent event) {
+        txfVand.clear();
+        lvwFadeWhisky.getSelectionModel().clearSelection();
+        lvwWhiskyer.getSelectionModel().clearSelection();
+
+    }
+
+*/
 
 
 }

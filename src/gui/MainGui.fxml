@@ -14,7 +14,7 @@
 
 <TabPane fx:id="guiStage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="674.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainGuiController">
   <tabs>
-    <Tab fx:id="tabFade" onSelectionChanged="#tabClearAction" text="Fade">
+    <Tab fx:id="tabFade" text="Fade">
       <content>
         <AnchorPane fx:id="pnFade" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -39,7 +39,7 @@
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab fx:id="tabDestilleringer" onSelectionChanged="#tabClearAction" text="Destilleringer">
+    <Tab fx:id="tabDestilleringer" text="Destilleringer">
       <content>
         <AnchorPane fx:id="pnDestillater" minHeight="0.0" minWidth="0.0" prefHeight="420.0" prefWidth="600.0">
                <children>
@@ -71,7 +71,7 @@
                </children></AnchorPane>
       </content>
     </Tab>
-      <Tab fx:id="tabPåfyldning" onSelectionChanged="#tabClearAction" text="Påfyldning">
+      <Tab fx:id="tabPåfyldning" text="Påfyldning">
          <content>
             <AnchorPane fx:id="pnPåfyldning" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -81,7 +81,7 @@
                   <Label fx:id="lblFadPå" layoutX="397.0" layoutY="324.0" text="Fad:" />
                   <Label fx:id="lblStartDato" layoutX="33.0" layoutY="389.0" text="Start dato:" />
                   <Label fx:id="lblMedarbejder" layoutX="25.0" layoutY="424.0" text="Medarbejder:" />
-                  <Button fx:id="btnOpretPåfyldning" layoutX="25.0" layoutY="488.0" mnemonicParsing="false" onAction="#opretPåfyldningAction" text="Opret påfyldning" />
+                  <Button fx:id="btnOpretPåfyldning" layoutX="97.0" layoutY="462.0" mnemonicParsing="false" onAction="#opretPåfyldningAction" text="Opret påfyldning" />
                   <ListView fx:id="lvwFadPå" layoutX="395.0" layoutY="351.0" prefHeight="146.0" prefWidth="200.0" />
                   <ListView fx:id="lvwDestillatPå" layoutX="395.0" layoutY="58.0" prefHeight="183.0" prefWidth="200.0" />
                   <ComboBox fx:id="lstLager" layoutX="455.0" layoutY="272.0" prefWidth="150.0" />
@@ -95,7 +95,7 @@
             </AnchorPane>
          </content>
       </Tab>
-      <Tab fx:id="tabLager" onSelectionChanged="#tabClearAction" text="Lager">
+      <Tab fx:id="tabLager" text="Lager">
          <content>
             <AnchorPane fx:id="pnLager" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -129,7 +129,7 @@
             </AnchorPane>
          </content>
       </Tab>
-      <Tab fx:id="tabWhisky" onSelectionChanged="#tabClearAction" text="Whisky">
+      <Tab fx:id="tabWhisky" text="Whisky">
          <content>
             <AnchorPane fx:id="pnWhisky" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
