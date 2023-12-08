@@ -30,6 +30,7 @@ public class DestillatTilPåfyldning implements Serializable {
 
     @Override
     public String toString() {
-        return "destillat=" + destillat + ", mængdeLiter=" + mængdeLiter + ", alkoholProcent=" + alkoholProcent;
+        return String.format("Destillat: %s. \nMængde i Liter: %.2f. \n Alkohol Procent: %.2f",
+                destillat.getNewMakeNr(),mængdeLiter,alkoholProcent);
     }
 }
