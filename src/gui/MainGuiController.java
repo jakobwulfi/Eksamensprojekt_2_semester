@@ -783,8 +783,8 @@ public class MainGuiController {
 
     @FXML
     void lagerInfoAction(ActionEvent event) {
-        Lager lager = lstLager.getSelectionModel().getSelectedItem();
         lvwFadPå.getItems().clear();
+        Lager lager = lstLager.getSelectionModel().getSelectedItem();
         for (Række række : lager.getRækker()){
             for (Hylde hylde : række.getHylder()){
                 if (!hylde.getFade().isEmpty()){
@@ -795,7 +795,6 @@ public class MainGuiController {
 
             }
             }
-        lstLager.getSelectionModel().clearSelection();
         }
 
     //---------------------------------------------------------------------
