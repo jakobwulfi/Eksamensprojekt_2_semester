@@ -12,7 +12,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane fx:id="guiStage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="674.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainGuiController">
+<TabPane fx:id="guiStage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="674.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainGuiController">
   <tabs>
     <Tab fx:id="tabFade" text="Fade">
       <content>
@@ -100,7 +100,7 @@
             <AnchorPane fx:id="pnLager" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Button fx:id="btnOpretLager" layoutX="498.0" layoutY="207.0" mnemonicParsing="false" onAction="#opretLagerAction" text="Opret Lager" />
-                  <ListView fx:id="lvwLagre" layoutX="29.0" layoutY="35.0" prefHeight="198.0" prefWidth="200.0" />
+                  <ListView fx:id="lvwLagre" layoutX="29.0" layoutY="35.0" onMouseClicked="#setFadePåLagerListe" prefHeight="198.0" prefWidth="200.0" />
                   <TextField fx:id="txfRækker" layoutX="464.0" layoutY="31.0" />
                   <TextField fx:id="txfHylder" layoutX="464.0" layoutY="66.0" />
                   <TextField fx:id="txfAdresse" layoutX="463.0" layoutY="134.0" />
@@ -112,7 +112,7 @@
                   <Label fx:id="lblAdresse" layoutX="395.0" layoutY="138.0" text="Adresse:" />
                   <Label fx:id="lblNavn" layoutX="403.0" layoutY="169.0" text="Navn:" />
                   <Label fx:id="lblFade" layoutX="32.0" layoutY="247.0" text="Fade:" />
-                  <ListView fx:id="lvwFadeLager" layoutX="29.0" layoutY="269.0" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="lvwFadeLager" layoutX="29.0" layoutY="269.0" onMouseClicked="#setFadePåLagerListe" prefHeight="200.0" prefWidth="200.0" />
                   <Label fx:id="lblPlads" layoutX="364.0" layoutY="107.0" text="Plads per hylde" />
                   <TextField fx:id="txfHylde" layoutX="464.0" layoutY="103.0" />
                   <Label fx:id="lblRækkeNr" layoutX="391.0" layoutY="263.0" text="Række nr:" />
