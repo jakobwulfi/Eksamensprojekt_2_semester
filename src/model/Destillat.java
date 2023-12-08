@@ -99,9 +99,6 @@ public class Destillat implements Serializable {
     public void setStartVolume(double startVolume) {
         this.startVolume = startVolume;
     }
-    public String setKasper() {
-        return "hej";
-    }
 
     @Override
     public String toString() {
