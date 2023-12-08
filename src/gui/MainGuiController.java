@@ -2,6 +2,7 @@ package gui;
 
 import controller.Controller;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -12,6 +13,7 @@ import model.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainGuiController {
@@ -738,6 +740,18 @@ public class MainGuiController {
 
     }
 
+    @FXML
+    void setFadePåLagerListe(Event e) {
+        lvwFadeLager.getItems().clear();
+        Lager l = lvwLagre.getSelectionModel().getSelectedItem();
+        List<Fad> fadePåLager = new ArrayList<>();
+        for (Række r : l.getRækker()) {
+            for (Hylde h : r.getHylder()) {
+                fadePåLager.addAll(h.getFade());
+            }
+        }
+        lvwFadeLager.getItems().addAll(fadePåLager);
+    }
 /*
     @FXML
     void updateDestilleringer(ActionEvent event) {
