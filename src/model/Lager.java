@@ -21,8 +21,6 @@ public class Lager implements Serializable {
         this.rækker = rækker;
     }
 
-    //---------------------------------------------------------------------
-
     public String getAdresse() {
         return adresse;
     }
@@ -47,6 +45,9 @@ public class Lager implements Serializable {
     public void addRække(Række række) {
         rækker.add(række);
     }
+
+    //---------------------------------------------------------------------
+
     public int getmaxKapacitet() {
         int sum = 0;
         for (Række r : rækker) {
@@ -56,8 +57,11 @@ public class Lager implements Serializable {
         }
         return sum;
     }
+
+    //---------------------------------------------------------------------
+
     @Override
     public String toString() {
-        return navn + ", adresse: " + adresse + ", kapacitet: " + getmaxKapacitet();
+        return navn + "\nAdresse: " + adresse + "\nKapacitet: " + getmaxKapacitet();
     }
 }

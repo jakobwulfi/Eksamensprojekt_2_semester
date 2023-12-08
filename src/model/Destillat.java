@@ -30,9 +30,7 @@ public class Destillat implements Serializable {
         this.startVolume = startVolume;
         this.mængdeLiter = startVolume;
     }
-    // metoder
 
-    // get og set
     public String getMaltBatch() {
         return maltBatch;
     }
@@ -100,17 +98,19 @@ public class Destillat implements Serializable {
         this.startVolume = startVolume;
     }
 
+    //---------------------------------------------------------------------
+
     @Override
     public String toString() {
-        return String.format("New make nr: %s. Alkohol procent: %f. Kornsort: %s",newMakeNr,alkoholProcent,kornsort );
+        return String.format("New make nr: %s \nAlkohol procent: %f \nKornsort: %s \n",newMakeNr,alkoholProcent,kornsort );
     }
+
+    //---------------------------------------------------------------------
 
     public String destillatInfo(){
-        return String.format("Maltbatch: %s. Kornsort: %s. Medarbejder: %s.  Mængde i liter: %f. Alkohol procent: %f."
-                        + " Ryge materiale: %s.  Kommentar: %s. New make nr: %s. Start dato: " + startDato.toString()
-                + ". Slut dato: " + slutDato.toString() + ". Start volume: %f", maltBatch,kornsort,medarbejder,
+        return String.format("Maltbatch: %s \nKornsort: %s \nMedarbejder: %s \nMængde i liter: %.2f \nAlkohol procent: %.2f"
+                        + " \nRyge materiale: %s \nKommentar: %s \nNew make nr: %s \nStart dato: " + startDato.toString()
+                + "\nSlut dato: " + slutDato.toString() + ". \nStart volume: %.2f", maltBatch,kornsort,medarbejder,
                 mængdeLiter, alkoholProcent, rygeMateriale, kommentar,newMakeNr, startVolume);
     }
-
-
 }

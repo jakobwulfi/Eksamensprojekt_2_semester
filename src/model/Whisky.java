@@ -32,7 +32,9 @@ public class Whisky implements Serializable {
         updateAntalFlasker();
         updateAlkoholProcent();
     }
-    // metoder
+
+    //---------------------------------------------------------------------
+
     public String getWhiskyType() {
         return whiskyType;
     }
@@ -41,22 +43,6 @@ public class Whisky implements Serializable {
     }
     public double getAntalFlasker() {
         return antalFlasker;
-    }
-    public void updateAntalFlasker() {
-        double sum = vandVolumen;
-        for (Fad f : fade) {
-            sum += f.getNuværendeMængdeLiter();
-        }
-        this.antalFlasker = sum /0.7;
-    }
-    private void updateAlkoholProcent() {
-        double alkoholVolume = 0;
-        double volume = vandVolumen;
-        for (Fad f : fade) {
-            alkoholVolume += (f.getNuværendeMængdeLiter() * (f.getPåfyldning().getAlkoholProcent() / 100));
-            volume += f.getNuværendeMængdeLiter();
-        }
-        this.alkoholProcent = (alkoholVolume/volume)* 100;
     }
     public List<Destillat> getDestillater() {
         return destillater;
@@ -68,6 +54,33 @@ public class Whisky implements Serializable {
         return fade;
     }
 
+    //---------------------------------------------------------------------
+
+    public void updateAntalFlasker() {
+        double sum = vandVolumen;
+        for (Fad f : fade) {
+            sum += f.getNuværendeMængdeLiter();
+        }
+        this.antalFlasker = sum /0.7;
+    }
+
+    //---------------------------------------------------------------------
+
+    /**
+     * Opdater alkohol procent på et fad
+     */
+    private void updateAlkoholProcent() {
+        double alkoholVolume = 0;
+        double volume = vandVolumen;
+        for (Fad f : fade) {
+            alkoholVolume += (f.getNuværendeMængdeLiter() * (f.getPåfyldning().getAlkoholProcent() / 100));
+            volume += f.getNuværendeMængdeLiter();
+        }
+        this.alkoholProcent = (alkoholVolume/volume)* 100;
+    }
+
+    //---------------------------------------------------------------------
+
     @Override
     public String toString() {
         String malt = "";
@@ -76,8 +89,10 @@ public class Whisky implements Serializable {
                 malt += d.getMaltBatch() + " ";
             }
         }
-        return "Type: " + this.whiskyType + ", malt: " + malt + ", antal flasker: " + this.antalFlasker;
+        return "Type: " + this.whiskyType + "\nMalt: " + malt + "\nAntal flasker: " + this.antalFlasker;
     }
+
+    //---------------------------------------------------------------------
 
     /**
      * Denne metode tager information fra alle fad og destillater tilknyttet til den pågældene whisky
@@ -100,7 +115,7 @@ public class Whisky implements Serializable {
         }
         etikette += fadeFra + "\n" + fadeType + "\n";
 
-        // destillat info
+        // Destillat info
         String kornsort = "Kornsorte anvendt: ";
         String medarbejder = "Hvem har lavet whiskyen: ";
         String rygemateriale = "Rygemateriale anvendt: ";

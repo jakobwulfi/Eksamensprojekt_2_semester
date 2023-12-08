@@ -20,7 +20,13 @@ public class Fad implements Serializable {
         this.fadNr = fadNr;
         this.fadStørrelse = fadStørrelse;
     }
-    // metoder
+
+    //---------------------------------------------------------------------
+
+    /**
+     * Opdater volumen på et fad
+     * @param volumen
+     */
     public void updateVolumen(double volumen) {
         if (volumen > fadStørrelse){
             throw new IllegalArgumentException("Mængde er Størrer end fadet kan indenholde");
@@ -29,7 +35,8 @@ public class Fad implements Serializable {
         }
     }
 
-    // get og set
+    //---------------------------------------------------------------------
+
     public String getFadFra() {
         return fadFra;
     }
@@ -66,14 +73,15 @@ public class Fad implements Serializable {
     public double getNuværendeMængdeLiter() {
         return NuværendeMængdeLiter;
     }
-
     public void setPåfyldning(Påfyldning påfyldning) {
         this.påfyldning = påfyldning;
     }
 
+    //---------------------------------------------------------------------
+
     @Override
     public String toString() {
-        return String.format("Oprindelses land: %s. Fad type: %s. Fadstørrelse i liter: %f. Fill nr: %d. Fad nr: %d"
-                ,fadFra,fadType,fadStørrelse,fillNr, fadNr);
+        return String.format("Fad nr: %d \nOprindelses land: %s \nFad type: %s \nFadstørrelse i liter: %.2f \nFill nr: %d \n",
+                fadNr,fadFra,fadType,fadStørrelse,fillNr);
     }
 }
