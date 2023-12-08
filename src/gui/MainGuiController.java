@@ -502,7 +502,7 @@ public class MainGuiController {
 
     @FXML
     void tilføjFadTilLagerAction(ActionEvent event) { // skal laves fra lager til hylde
-        Lager lager = lstLager.getSelectionModel().getSelectedItem();
+        Lager lager = lvwLagre.getSelectionModel().getSelectedItem();
         Fad fadTilLager = lvwFadeIkkePåLager.getSelectionModel().getSelectedItem();
         boolean found = false;
         for (Række række : lager.getRækker()){
@@ -519,24 +519,22 @@ public class MainGuiController {
                 }
             }
         }
-        do {
-            for (Lager lag : lvwLagre.getItems()){
-                if (!lag.equals(lager)){
-                    for (Række række : lag.getRækker()){
-                        for (Hylde hylde : række.getHylder()){
-                            if (!hylde.getFade().isEmpty()){
-                                for (Fad fad : hylde.getFade()){
-                                    if (fad.equals(fadTilLager)){
-                                        hylde.removeFad(fad);
-                                        found = true;
-                                    }
+        for (Lager lag : lvwLagre.getItems()){
+            if (!lag.equals(lager)){
+                for (Række række : lag.getRækker()){
+                    for (Hylde hylde : række.getHylder()){
+                        if (!hylde.getFade().isEmpty()){
+                            for (Fad fad : hylde.getFade()){
+                                if (fad.equals(fadTilLager)){
+                                    hylde.removeFad(fad);
+                                    found = true;
                                 }
                             }
                         }
                     }
                 }
             }
-        } while (!found);
+        }
 
 
 
@@ -549,7 +547,7 @@ public class MainGuiController {
             txfRækkeNr.clear();
             txfHyldeNr.clear();
             lvwFadeIkkePåLager.getSelectionModel().clearSelection();
-            lvwLagre.getSelectionModel().clearSelection();
+            //lvwLagre.getSelectionModel().clearSelection();
             lvwFadeIkkePåLager.getItems().remove(fadTilLager);
         } catch (NumberFormatException ex){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -570,7 +568,7 @@ public class MainGuiController {
             alert.setHeaderText(ex.getMessage());
             alert.show();
         }
-
+        setFadePåLagerListe(event);
     }
 
     //---------------------------------------------------------------------
@@ -799,6 +797,18 @@ public class MainGuiController {
         lstLager.getSelectionModel().clearSelection();
         }
 
+    @FXML
+    void setFadePåLagerListe(Event e) {
+        lvwFadeLager.getItems().clear();
+        Lager l = lvwLagre.getSelectionModel().getSelectedItem();
+        List<Fad> fadePåLager = new ArrayList<>();
+        for (Række r : l.getRækker()) {
+            for (Hylde h : r.getHylder()) {
+                fadePåLager.addAll(h.getFade());
+            }
+        }
+        lvwFadeLager.getItems().addAll(fadePåLager);
+    }
     //---------------------------------------------------------------------
 
     @FXML

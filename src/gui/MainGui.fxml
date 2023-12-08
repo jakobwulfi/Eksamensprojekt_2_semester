@@ -12,7 +12,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane fx:id="guiStage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="674.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainGuiController">
+<TabPane fx:id="guiStage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="674.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainGuiController">
   <tabs>
     <Tab fx:id="tabFade" text="Fade">
       <content>
@@ -76,7 +76,7 @@
             <AnchorPane fx:id="pnLager" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Button fx:id="btnOpretLager" layoutX="498.0" layoutY="207.0" mnemonicParsing="false" onAction="#opretLagerAction" text="Opret Lager" />
-                  <ListView fx:id="lvwLagre" layoutX="29.0" layoutY="35.0" prefHeight="163.0" prefWidth="266.0" />
+                  <ListView fx:id="lvwLagre" layoutX="29.0" layoutY="35.0" onMouseClicked="#setFadePåLagerListe" prefHeight="163.0" prefWidth="266.0" />
                   <TextField fx:id="txfRækker" layoutX="464.0" layoutY="31.0" />
                   <TextField fx:id="txfHylder" layoutX="464.0" layoutY="66.0" />
                   <TextField fx:id="txfAdresse" layoutX="463.0" layoutY="134.0" />
