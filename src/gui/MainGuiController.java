@@ -12,6 +12,7 @@ import model.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainGuiController {
@@ -78,6 +79,9 @@ public class MainGuiController {
 
     @FXML
     private Label lblFadStørrelse;
+
+    @FXML
+    private Label lblFadIkkeLager;
 
     @FXML
     private Label lblFadType;
@@ -162,6 +166,10 @@ public class MainGuiController {
 
     @FXML
     private ListView<Destillat> lvwDestillatPå;
+
+
+    @FXML
+    private ListView<Fad> lvwFadeIkkePåLager;
 
     @FXML
     private ListView<Fad> lvwFade;
@@ -377,7 +385,7 @@ public class MainGuiController {
             Fad f = Controller.opretFad(txfFadOprindelse.getText(), txfFadType.getText(), fadNr, fadStørrelse);
             lvwFade.getItems().add(f);
             lvwFadPå.getItems().add(f);
-            lvwFadeLager.getItems().add(f);
+            lvwFadeIkkePåLager.getItems().add(f);
             txfFadNr.clear();
             txfFadStørrelse.clear();
             txfFadOprindelse.clear();
@@ -495,7 +503,7 @@ public class MainGuiController {
     @FXML
     void tilføjFadTilLagerAction(ActionEvent event) { // skal laves fra lager til hylde
         Lager lager = lstLager.getSelectionModel().getSelectedItem();
-        Fad fadTilLager = lvwFadeLager.getSelectionModel().getSelectedItem();
+        Fad fadTilLager = lvwFadeIkkePåLager.getSelectionModel().getSelectedItem();
         boolean found = false;
         for (Række række : lager.getRækker()){
             for (Hylde hylde : række.getHylder()){
@@ -537,12 +545,12 @@ public class MainGuiController {
             int hylde = Integer.valueOf(txfHyldeNr.getText());
             int række = Integer.valueOf(txfRækkeNr.getText());
 
-            Fad fad = lvwFadeLager.getSelectionModel().getSelectedItem();
-            Controller.addFadTilHylde(fad,hylde,række,lager);
+            Controller.addFadTilHylde(fadTilLager,hylde,række,lager);
             txfRækkeNr.clear();
             txfHyldeNr.clear();
-            lvwFadeLager.getSelectionModel().clearSelection();
+            lvwFadeIkkePåLager.getSelectionModel().clearSelection();
             lvwLagre.getSelectionModel().clearSelection();
+            lvwFadeIkkePåLager.getItems().remove(fadTilLager);
         } catch (NumberFormatException ex){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.initOwner(guiStage.getScene().getWindow());
@@ -648,7 +656,26 @@ public class MainGuiController {
     public void initialize() {
 
         lvwFade.getItems().addAll(Controller.getFade());
-        lvwFadeLager.getItems().addAll(Controller.getFade());
+
+       ArrayList<Fad> fade = (ArrayList<Fad>) Controller.getFade();
+
+       for (Fad fad : Controller.getFade()){
+        for (Lager lager : Controller.getLagere()){
+            for (Række række : lager.getRækker()){
+               for (Hylde hylde : række.getHylder()){
+                   if (!hylde.getFade().isEmpty()) {
+                       for (Fad hyldefad : hylde.getFade()){
+                           if (hyldefad.equals(fad)){
+                                fade.remove(fad);
+                           }
+                           }
+                       }
+                   }
+               }
+           }
+       }
+
+        lvwFadeIkkePåLager.getItems().addAll(fade);
 
 
         lvwFadeWhisky.getItems().addAll(Controller.TreAarGammel());
