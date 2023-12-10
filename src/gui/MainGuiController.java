@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -803,12 +802,15 @@ public class MainGuiController {
         List<Fad> fadePåLager = new ArrayList<>();
         for (Række r : l.getRækker()) {
             for (Hylde h : r.getHylder()) {
-                fadePåLager.addAll(h.getFade());
+                for (Fad f : h.getFade()) {
+                    lvwFadeLager.getItems().addAll( Controller.findLokationPåFad(f));
+                }
             }
         }
-        lvwFadeLager.getItems().addAll(fadePåLager);
     }
     //---------------------------------------------------------------------
+
+
 
     @FXML
     void fadInfoAction(MouseEvent event) {

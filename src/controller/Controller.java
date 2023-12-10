@@ -214,19 +214,21 @@ public abstract class Controller {
      * Finder lokation på fad
      * Pre: fad oprettet
      */
-    public static String findLokationPåFad(Fad fad) {
+    public static List<Fad> findLokationPåFad(Fad fad) {
+        List<Fad> Fade = new ArrayList<>();
         for (Lager lager : storage.getLagere()) {
             for (Række række : lager.getRækker()) {
                 for (Hylde hylde : række.getHylder()) {
                     if (hylde.getFade().contains(fad)) {
-                        return "Lager: " + lager.getNavn() +
-                                ", Række: " + række.getRækkeNr() +
-                                ", Hylde: " + hylde.getHyldeNr();
+                        String lokation = "Række: " + række.getRækkeNr() +
+                                            ", Hylde: " + hylde.getHyldeNr();
+                        FadInfo fadi = new FadInfo(fad, lokation);
+                        Fade.add(fadi);
                     }
                 }
             }
         }
-        return "Fad ikke fundet i Lageret.";
+        return Fade;
     }
 
         //---------------------------------------------------------------------

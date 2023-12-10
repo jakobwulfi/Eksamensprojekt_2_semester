@@ -1,5 +1,7 @@
 package model;
 
+import controller.Controller;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ public class Fad implements Serializable {
     private double fadStørrelse;
     private double NuværendeMængdeLiter = 0;
     private Påfyldning påfyldning;
+    public String lokation;
 
     public Fad(String fadFra, String fadType, int fadNr, double fadStørrelse) {
         this.fadFra = fadFra;
@@ -19,6 +22,18 @@ public class Fad implements Serializable {
         this.fillNr = 1;
         this.fadNr = fadNr;
         this.fadStørrelse = fadStørrelse;
+    }
+    public Fad(String lokation, String fadFra, String fadType, int fillNr, int fadNr, double fadStørrelse) {
+        this.lokation = lokation;
+        this.fadFra = fadFra;
+        this.fadType = fadType;
+        this.fillNr = fillNr;
+        this.fadNr = fadNr;
+        this.fadStørrelse = fadStørrelse;
+    }
+
+    public Fad() {
+
     }
 
     //---------------------------------------------------------------------
@@ -73,20 +88,31 @@ public class Fad implements Serializable {
     public double getNuværendeMængdeLiter() {
         return NuværendeMængdeLiter;
     }
-
     public void setPåfyldning(Påfyldning påfyldning) {
         this.påfyldning = påfyldning;
     }
 
+    public String getLokation() {
+        return lokation;
+    }
     //---------------------------------------------------------------------
 
     @Override
     public String toString() {
-        return String.format("Fad nr: %d, Fill nr: %d, \nFad type: %s",fadNr, fillNr, fadType);
+        return String.format("Fad nr: %d",fadNr);
+        // Fill nr: %d, \nFad type: %s"
+        //, fillNr, fadType)
+    }
+
+    public String toStringInfo() {
+        return String.format("Fad nr: %d %s",fadNr, lokation);
+        // Fill nr: %d, \nFad type: %s"
+        //, fillNr, fadType)
     }
 
     public String toStringLong(){
-        return String.format("Oprindelses land: %s. \nFad type: %s. \nFadstørrelse i liter: %.2f. \nFill nr: %d. \nFad nr: %d"
-                ,fadFra,fadType,fadStørrelse,fillNr, fadNr);
+        return String.format("Fad nr: %d \nOprindelses land: %s \nFad type: %s \nFadstørrelse i liter: %.2f \nFill nr: %d"
+                ,fadNr,fadFra,fadType,fadStørrelse,fillNr);
+                //Sat fadnr først
     }
 }
