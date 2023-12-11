@@ -18,7 +18,7 @@ public abstract class Controller {
 
     /**
      * Opret et nyt Destillat
-     * Pre: startDato > Slutdato,
+     * Pre: startDato > slutdato, alkoholprocent < 0 & > 100,
      */
     public static Destillat opretDestillat(String maltBatch, String kornsort, String medarbejder, double alkoholProcent,
                                            String rygeMateriale, String kommentar, String newMakeNr, LocalDate startDato, LocalDate slutDato, double startVolume) {
@@ -30,7 +30,7 @@ public abstract class Controller {
 
     /**
      * Update Destilat.
-     * Pre:
+     * Pre: startDato > slutdato
      */
     public static void updateDestillat(Destillat destillat, String maltBatch, String kornsort, String medarbejder, double mængdeLiter, double alkoholProcent,
                                        String rygeMateriale, String kommentar, String newMakeNr, LocalDate startDato, LocalDate slutDato, double startVolume) {
@@ -236,7 +236,7 @@ public abstract class Controller {
      * Finder alle fade der har en alder på 3 år+
      * @return en liste af Fade > 3 år
      */
-    public static List<Fad> TreAarGammel() {
+    public static List<Fad> treAarGammel() {
         List<Fad> TreAarGammel = new ArrayList<>();
         for (Fad f : Controller.getFade()) {
             try {
@@ -273,9 +273,9 @@ public abstract class Controller {
         påfyldning.setAlkoholProcent(alkoholProcent);
     }
 
+        //---------------------------------------------------------------------
+
     public static void  opdaterMængdeIFad(Fad fad, double mængde){
         fad.updatenuværendeMængdeLiter(mængde);
     }
-
-
 }

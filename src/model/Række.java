@@ -19,24 +19,11 @@ public class Række implements Serializable {
     public int getRækkeNr() {
         return rækkeNr;
     }
-
     public List<Hylde> getHylder() {
         return hylder;
     }
     public void addHylde(Hylde h) {
         hylder.add(h);
-    }
-
-    public boolean isLedig() {
-        return ledig;
-    }
-
-    public void setRækkeNr(int rækkeNr) {
-        this.rækkeNr = rækkeNr;
-    }
-
-    public void setLedig(boolean ledig) {
-        this.ledig = ledig;
     }
 
     //---------------------------------------------------------------------

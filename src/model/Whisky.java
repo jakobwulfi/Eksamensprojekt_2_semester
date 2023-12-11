@@ -35,27 +35,6 @@ public class Whisky implements Serializable {
 
     //---------------------------------------------------------------------
 
-    public String getWhiskyType() {
-        return whiskyType;
-    }
-    public void setWhiskyType(String whiskyType) {
-        this.whiskyType = whiskyType;
-    }
-    public double getAntalFlasker() {
-        return antalFlasker;
-    }
-    public List<Destillat> getDestillater() {
-        return destillater;
-    }
-    public void setDestillater(List<Destillat> destillater) {
-        this.destillater = destillater;
-    }
-    public List<Fad> getFade() {
-        return fade;
-    }
-
-    //---------------------------------------------------------------------
-
     public void updateAntalFlasker() {
         double sum = vandVolumen;
         for (Fad f : fade) {
@@ -102,7 +81,7 @@ public class Whisky implements Serializable {
     public String toEtikette() {
         String etikette = "";
 
-        // Fade info
+        // Fad info
         String fadeFra = "Fade fra: ";
         String fadeType = "Fade Typer: ";
         for (Fad f : fade) {
@@ -138,7 +117,7 @@ public class Whisky implements Serializable {
         etikette += kornsort + "\n" + medarbejder + "\n" + rygemateriale + "\n" + maltBatch + "\n" + "Tapningsdato: " +
                 this.tapningsDato + "\n" + alkoholprocent + "%";
 
-        // vand
+        // Vand
         if (vandVolumen == 0) {
             etikette += "\nDenne whisky er cask strength.";
         } else {

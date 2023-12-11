@@ -19,11 +19,9 @@ public class DestillatTilPåfyldning implements Serializable {
     public double getAlkoholProcent() {
         return alkoholProcent;
     }
-
     public double getMængdeLiter() {
         return mængdeLiter;
     }
-
     public Destillat getDestillat() {
         return destillat;
     }

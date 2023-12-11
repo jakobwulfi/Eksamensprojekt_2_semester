@@ -110,7 +110,7 @@ class ControllerTest {
         Påfyldning påfyldning = Controller.opretPåfyldning(List.of(d1), fad, LocalDate.of(2019, 12, 06), "Lars");
 
         //Act
-        List<Fad> result = Controller.TreAarGammel();
+        List<Fad> result = Controller.treAarGammel();
 
         //Assert
         assertEquals(1, result.size());

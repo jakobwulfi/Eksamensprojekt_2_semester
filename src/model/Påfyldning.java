@@ -18,28 +18,21 @@ public class Påfyldning implements Serializable {
         this.medarbejder = medarbejder;
         beregnStartProcent();
     }
-    // metoder
 
-    // get og set
     public List<DestillatTilPåfyldning> getDestillat() {
         return destillater;
     }
     public LocalDate getStartDato() {
         return startDato;
     }
-    public void setStartDato(LocalDate startDato) {
-        this.startDato = startDato;
+    public double getAlkoholProcent() {
+        return alkoholProcentNu;
     }
-    public String getMedarbejder() {
-        return medarbejder;
-    }
-    public void setMedarbejder(String medarbejder) {
-        this.medarbejder = medarbejder;
+    public void setAlkoholProcent(double alkoholProcent) {
+        this.alkoholProcentNu = alkoholProcent;
     }
 
-    /*public double getMængdeLiter() {
-        return ;
-    }*/
+    //---------------------------------------------------------------------
 
     public void beregnStartProcent(){
         double alkoholVolume = 0;
@@ -52,12 +45,7 @@ public class Påfyldning implements Serializable {
         this.alkoholProcentNu = alkoholProcentStart;
     }
 
-    public double getAlkoholProcent() {
-        return alkoholProcentNu;
-    }
-    public void setAlkoholProcent(double alkoholProcent) {
-        this.alkoholProcentNu = alkoholProcent;
-    }
+    //---------------------------------------------------------------------
 
     @Override
     public String toString() {

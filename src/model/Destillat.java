@@ -79,9 +79,6 @@ public class Destillat implements Serializable {
     public void setNewMakeNr(String newMakeNr) {
         this.newMakeNr = newMakeNr;
     }
-    public LocalDate getStartDato() {
-        return startDato;
-    }
     public void setStartDato(LocalDate startDato) {
         this.startDato = startDato;
     }
@@ -114,6 +111,4 @@ public class Destillat implements Serializable {
                 + ". \nSlut dato: " + slutDato.toString() + ". \nStart volume: %.2f", maltBatch,kornsort,medarbejder,
                 mængdeLiter, alkoholProcent, rygeMateriale, kommentar,newMakeNr, startVolume);
     }
-
-
 }

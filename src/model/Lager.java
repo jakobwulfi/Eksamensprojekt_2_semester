@@ -21,20 +21,8 @@ public class Lager implements Serializable {
         this.rækker = rækker;
     }
 
-    public String getAdresse() {
-        return adresse;
-    }
     public void setAdresse(String adresse) {
         this.adresse = adresse;
-    }
-    public int getKapacitet() {
-        return kapacitet;
-    }
-    public void setKapacitet(int kapacitet) {
-        this.kapacitet = kapacitet;
-    }
-    public String getNavn() {
-        return navn;
     }
     public void setNavn(String navn) {
         this.navn = navn;
