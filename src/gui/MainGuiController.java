@@ -446,66 +446,70 @@ public class MainGuiController {
 
     @FXML
     void opretPåfyldningAction(ActionEvent event) {
-        try {
-            List<DestillatTilPåfyldning> destillat = lvwDestillaterTilPåfyldning.getItems();
-            Fad fad = lvwFadPå.getSelectionModel().getSelectedItem(); // måske ikke korrekt
-            LocalDate startDato = LocalDate.parse(txfStartDatoPåfyld.getText());
-            String medarbejder = txfMedarbejderPå.getText();
-            for (DestillatTilPåfyldning destillatTilPåfyldning : destillat){
-                if (startDato.isBefore(destillatTilPåfyldning.getDestillat().getSlutDato())){
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.initOwner(guiStage.getScene().getWindow());
-                    alert.setTitle("Date Error");
-                    alert.setHeaderText("Start dato skal efter detillatets slut dato");
-                    alert.show();
-                }
-            }
+        if (lvwDestillaterTilPåfyldning.getItems().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Indtastnings Fejl");
+            alert.setHeaderText("Destillat ikke valgt");
+            alert.show();
+            return;
+        }
 
-            if (medarbejder == null ||medarbejder.trim().isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.initOwner(guiStage.getScene().getWindow());
-                alert.setTitle("Indtastnings Fejl");
-                alert.setHeaderText("Indtast venlist en medarbejder");
-                alert.show();
-            }
-                if (lvwDestillaterTilPåfyldning.getItems().isEmpty()) {
+            try {
+                List<DestillatTilPåfyldning> destillat = lvwDestillaterTilPåfyldning.getItems();
+                Fad fad = lvwFadPå.getSelectionModel().getSelectedItem(); // måske ikke korrekt
+                LocalDate startDato = LocalDate.parse(txfStartDatoPåfyld.getText());
+                String medarbejder = txfMedarbejderPå.getText();
+                for (DestillatTilPåfyldning destillatTilPåfyldning : destillat) {
+                    if (startDato.isBefore(destillatTilPåfyldning.getDestillat().getSlutDato())) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.initOwner(guiStage.getScene().getWindow());
+                        alert.setTitle("Date Error");
+                        alert.setHeaderText("Start dato skal efter detillatets slut dato");
+                        alert.show();
+                    }
+                }
+
+                if (medarbejder == null || medarbejder.trim().isEmpty()) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.initOwner(guiStage.getScene().getWindow());
                     alert.setTitle("Indtastnings Fejl");
-                    alert.setHeaderText("Destillat ikke valgt");
+                    alert.setHeaderText("Indtast venlist en medarbejder");
                     alert.show();
-            } else {
-                Påfyldning p = Controller.opretPåfyldning(destillat, fad, startDato, medarbejder);
-                if (p.getStartDato().plusYears(3).isBefore(LocalDate.now())){
-                    lvwFadeWhisky.getItems().add(fad);
-                    lvwDestillaterTilPåfyldning.getItems().clear();
-                    lvwDestillatPå.getItems().clear();
-                } else {
-                    lvwDestillaterTilPåfyldning.getItems().clear();
-                    lvwDestillatPå.getItems().clear();
-                }
 
+                } else {
+                    Påfyldning p = Controller.opretPåfyldning(destillat, fad, startDato, medarbejder);
+                    if (p.getStartDato().plusYears(3).isBefore(LocalDate.now())) {
+                        lvwFadeWhisky.getItems().add(fad);
+                        lvwDestillaterTilPåfyldning.getItems().clear();
+                        lvwDestillatPå.getItems().clear();
+                    } else {
+                        lvwDestillaterTilPåfyldning.getItems().clear();
+                        lvwDestillatPå.getItems().clear();
+                    }
+
+                }
+            } catch (NullPointerException ex) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initOwner(guiStage.getScene().getWindow());
+                alert.setTitle("Format Error");
+                alert.setHeaderText("Null pointer exception");
+                alert.show();
+            } catch (DateTimeParseException ex) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initOwner(guiStage.getScene().getWindow());
+                alert.setTitle("Format Error");
+                alert.setHeaderText("Fejl i Dato indtastning");
+                alert.show();
+
+            } catch (IllegalArgumentException e) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initOwner(guiStage.getScene().getWindow());
+                alert.setTitle("Format Error");
+                alert.setHeaderText(e.getMessage());
+                alert.show();
             }
-        } catch (NullPointerException ex) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.initOwner(guiStage.getScene().getWindow());
-            alert.setTitle("Format Error");
-            alert.setHeaderText("Null pointer exception");
-            alert.show();
-        } catch (DateTimeParseException ex) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.initOwner(guiStage.getScene().getWindow());
-            alert.setTitle("Format Error");
-            alert.setHeaderText("Fejl i Dato indtastning");
-            alert.show();
-        } catch (IllegalArgumentException e){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.initOwner(guiStage.getScene().getWindow());
-            alert.setTitle("Format Error");
-            alert.setHeaderText(e.getMessage());
-            alert.show();
         }
-    }
 
     //---------------------------------------------------------------------
 
@@ -584,6 +588,15 @@ public class MainGuiController {
 
     @FXML
     void tilføjWhiskyAction(ActionEvent event) {
+        if (lvwFadeWhisky.getSelectionModel().getSelectedItems().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Indtastnings Fejl");
+            alert.setHeaderText("Fad ikke valgt");
+            alert.show();
+            return;
+        }
+
         try {
            List<Fad> fade = lvwFadeWhisky.getSelectionModel().getSelectedItems();
            double vand  = Double.valueOf(txfVand.getText());
