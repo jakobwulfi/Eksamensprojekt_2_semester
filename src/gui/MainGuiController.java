@@ -447,7 +447,7 @@ public class MainGuiController {
     @FXML
     void opretPåfyldningAction(ActionEvent event) {
         try {
-            List<DestillatTilPåfyldning> destillat = lvwDestillaterTilPåfyldning.getSelectionModel().getSelectedItems();
+            List<DestillatTilPåfyldning> destillat = lvwDestillaterTilPåfyldning.getItems();
             Fad fad = lvwFadPå.getSelectionModel().getSelectedItem(); // måske ikke korrekt
             LocalDate startDato = LocalDate.parse(txfStartDatoPåfyld.getText());
             String medarbejder = txfMedarbejderPå.getText();
@@ -581,6 +581,10 @@ public class MainGuiController {
            Whisky w = Controller.opretWhisky(fade,vand);
            lvwWhiskyer.getItems().add(w);
            lvwFadeWhisky.getSelectionModel().clearSelection();
+           for (Fad fad: fade){
+               lvwFadeWhisky.getItems().remove(fad);
+           }
+
         } catch (NumberFormatException ex){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.initOwner(guiStage.getScene().getWindow());
