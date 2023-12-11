@@ -514,39 +514,6 @@ public class MainGuiController {
         Lager lager = lvwLagre.getSelectionModel().getSelectedItem();
         Fad fadTilLager = lvwFadeIkkePåLager.getSelectionModel().getSelectedItem();
 
-        //lævn fra da vi kun havde fad list view og lager listview på lager tab
-       /* for (Række række : lager.getRækker()){
-            for (Hylde hylde : række.getHylder()){
-                if (!hylde.getFade().isEmpty()){
-                    for (Fad fad : hylde.getFade()){
-                        if (fad.getFadNr() == fadTilLager.getFadNr() ){
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.initOwner(guiStage.getScene().getWindow());
-                            alert.setTitle("Dupelicate error");
-                            alert.setHeaderText("fadet er allerede på lageret");alert.show();
-                        }
-                    }
-                }
-            }
-        }
-        for (Lager lag : lvwLagre.getItems()){
-            if (!lag.equals(lager)){
-                for (Række række : lag.getRækker()){
-                    for (Hylde hylde : række.getHylder()){
-                        if (!hylde.getFade().isEmpty()){
-                            for (Fad fad : hylde.getFade()){
-                                if (fad.equals(fadTilLager)){
-                                    hylde.removeFad(fad);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }*/
-
-
-
 
         try {
             int hylde = Integer.valueOf(txfHyldeNr.getText());
