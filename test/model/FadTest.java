@@ -16,7 +16,7 @@ class FadTest {
         Fad to = new Fad("Frankrig", "Sherry", 2, 135.00);
 
         //Arrange
-        et.updateVolumen(50);
+        et.updatenuværendeMængdeLiter(50);
 
         //Act
         double resultat = 50;
@@ -33,7 +33,7 @@ class FadTest {
          * T2
          */
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            to.updateVolumen(140);
+            to.updatenuværendeMængdeLiter(140);
         });
 
         assertEquals("Mængden er større end fad størrelse", exception.getMessage());
@@ -202,7 +202,7 @@ class FadTest {
     void getNuværendeMængdeLiter() {
         // Arrange
         Fad fad = new Fad("Italien", "Bourbon", 1, 80.00);
-        fad.updateVolumen(10.5);
+        fad.updatenuværendeMængdeLiter(10.5);
 
         // Act
         double result = fad.getNuværendeMængdeLiter();

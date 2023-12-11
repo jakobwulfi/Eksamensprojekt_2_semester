@@ -1,10 +1,6 @@
 package model;
 
-import controller.Controller;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Fad implements Serializable{
     private String fadFra;
@@ -26,12 +22,12 @@ public class Fad implements Serializable{
     //---------------------------------------------------------------------
 
     /**
-     * Opdater volumen på et fad
+     * Opdater nuværendeMængdeLiter på et fad
      * @param volumen
      */
-    public void updateVolumen(double volumen) {
+    public void updatenuværendeMængdeLiter(double volumen) {
         if (volumen > fadStørrelse){
-            throw new IllegalArgumentException("Mængde er Størrer end fadet kan indenholde");
+            throw new IllegalArgumentException("Mængde er større end fadet kan indeholde");
         } else {
             this.NuværendeMængdeLiter = volumen;
         }
@@ -84,7 +80,7 @@ public class Fad implements Serializable{
     @Override
     public String toString() {
         Double tilbage = fadStørrelse-NuværendeMængdeLiter;
-        return String.format("Fad nr: %d, Fill nr: %d\nVolumen tilbage: %.2f, \nFad type: %s",fadNr,fillNr, tilbage, fadType);
+        return String.format("Fad nr: %d, Fill nr: %d,  Plads tilbage: %.2f\nNuværende volumen: %.2f \nFad type: %s",fadNr,fillNr, tilbage, NuværendeMængdeLiter, fadType);
     }
 
     public String toStringLong(){

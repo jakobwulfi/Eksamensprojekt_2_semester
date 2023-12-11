@@ -150,7 +150,7 @@ public abstract class Controller {
         Whisky w = new Whisky(fade, vandVolumen);
         storage.storeWhisky(w);
         for (Fad f : fade) {
-            f.updateVolumen(0);
+            f.updatenuværendeMængdeLiter(0);
             f.setPåfyldning(null);
             f.setFillNr(f.getFillNr() + 1);
         }
@@ -188,7 +188,7 @@ public abstract class Controller {
         } else {
             Påfyldning p = new Påfyldning(destillater, startDato, medarbejder);
             fad.setPåfyldning(p);
-            fad.updateVolumen(volumen);
+            fad.updatenuværendeMængdeLiter(volumen);
             for (DestillatTilPåfyldning  destillat : destillater){
                 destillat.getDestillat().setMængdeLiter(destillat.getMængdeLiter() - destillat.getMængdeLiter());
             }
@@ -275,7 +275,7 @@ public abstract class Controller {
     }
 
     public static void  opdaterMængdeIFad(Fad fad, double mængde){
-        fad.updateVolumen(mængde);
+        fad.updatenuværendeMængdeLiter(mængde);
     }
 
 

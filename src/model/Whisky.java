@@ -89,7 +89,7 @@ public class Whisky implements Serializable {
                 malt += d.getMaltBatch() + " ";
             }
         }
-        return "Type: " + this.whiskyType + "\nMalt: " + malt + "\nAntal flasker: " + this.antalFlasker;
+        return "Type: " + this.whiskyType + "\nMalt: " + malt + String.format("\nAntal flasker: %.2f" ,this.antalFlasker);
     }
 
     //---------------------------------------------------------------------
@@ -134,8 +134,10 @@ public class Whisky implements Serializable {
                 maltBatch += d.getMaltBatch() + ", ";
             }
         }
-        etikette += kornsort + "\n" + medarbejder + "\n" + rygemateriale + "\n" + maltBatch + "\n" +
-                "Tapningsdato: " + this.tapningsDato + "\n" + "Alkoholprocent: " + this.alkoholProcent;
+        String alkoholprocent = String.format("Alkoholprocent: %.2f", this.alkoholProcent);
+        etikette += kornsort + "\n" + medarbejder + "\n" + rygemateriale + "\n" + maltBatch + "\n" + "Tapningsdato: " +
+                this.tapningsDato + "\n" + alkoholprocent + "%";
+
         // vand
         if (vandVolumen == 0) {
             etikette += "\nDenne whisky er cask strength.";
