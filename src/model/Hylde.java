@@ -73,7 +73,6 @@ public class Hylde implements Serializable {
     public void removeFad(Fad fad) {
         if (fade.contains(fad)) {
             fade.remove(fad);
-            maxKapacitet--;
             ledig = true;
         } else {
             throw new NullPointerException("Fadet er ikke på hylden.");
