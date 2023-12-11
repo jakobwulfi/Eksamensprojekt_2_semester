@@ -589,10 +589,11 @@ public class MainGuiController {
            double vand  = Double.valueOf(txfVand.getText());
            Whisky w = Controller.opretWhisky(fade,vand);
            lvwWhiskyer.getItems().add(w);
-           lvwFadeWhisky.getSelectionModel().clearSelection();
-           for (Fad fad: fade){
-               lvwFadeWhisky.getItems().remove(fad);
+            System.out.println(fade);
+           for (int i = 0; i < fade.size(); i++){
+               lvwFadeWhisky.getItems().remove(fade.get(i));
            }
+           lvwFadeWhisky.getSelectionModel().clearSelection();
 
         } catch (NumberFormatException ex){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
