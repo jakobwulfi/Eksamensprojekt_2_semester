@@ -819,8 +819,7 @@ public class MainGuiController {
                 if (empty || fad == null) {
                     setText(null);
                 } else {
-                    String text = "" + Controller.findLokationPåFad(fad);
-                    text = text.substring(1,text.length()-1);
+                    String text = fad + Controller.findLokationPåFad(fad);
                     setText(text);
                 }
             }
