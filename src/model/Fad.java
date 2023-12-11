@@ -22,8 +22,6 @@ public class Fad implements Serializable{
         this.fadNr = fadNr;
         this.fadStørrelse = fadStørrelse;
     }
-    public Fad() {
-    }
 
     //---------------------------------------------------------------------
 
