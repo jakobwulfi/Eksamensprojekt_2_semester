@@ -10,6 +10,10 @@ import model.Hylde;
 import model.Lager;
 import model.Række;
 
+import java.io.Closeable;
+import java.io.IOException;
+import java.util.ConcurrentModificationException;
+
 public class FlytFadGuiController {
     @FXML
     private Button btnFlytFad;
@@ -40,7 +44,7 @@ public class FlytFadGuiController {
     private TextField txfRække;
 
     @FXML
-    void flytFadAction(ActionEvent event) {
+    void flytFadAction(ActionEvent event) throws IOException{
         Fad fad = lvwFade.getSelectionModel().getSelectedItem();
         Lager lager = lvwLager.getSelectionModel().getSelectedItem();
         for (Række række : lager.getRækker()){
@@ -62,13 +66,13 @@ public class FlytFadGuiController {
             int hylde = Integer.valueOf(txfHylde.getText());
             Controller.addFadTilHylde(fad,hylde,rækker,lager);
 
-            for (Lager lag : lvwLager.getItems()){
-                if (!lag.equals(lager)){
-                    for (Række række : lag.getRækker()){
-                        for (Hylde hyld : række.getHylder()){
-                            if (!hyld.getFade().isEmpty()){
-                                for (Fad fade : hyld.getFade()){
-                                    if (fade.equals(fad)){
+            for (Lager lag : Controller.getLagere()) {
+                if (!lag.equals(lager)) {
+                    for (Række række : lag.getRækker()) {
+                        for (Hylde hyld : række.getHylder()) {
+                            if (!hyld.getFade().isEmpty()) {
+                                for (int i = 0; i < hyld.getFade().size(); i++) {
+                                    if (hyld.getFade().get(i).equals(fad)) {
                                         hyld.removeFad(fad);
                                     }
                                 }
@@ -77,11 +81,12 @@ public class FlytFadGuiController {
                     }
                 }
             }
+
             txfRække.clear();
             txfHylde.clear();
             lvwLager.getSelectionModel().clearSelection();
             lvwFade.getSelectionModel().clearSelection();
-            pnFlytFad.getScene().getWindow().hide();
+            ((Stage) pnFlytFad.getScene().getWindow()).close();
         }catch (NumberFormatException ex){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.initOwner(pnFlytFad.getScene().getWindow());
@@ -97,5 +102,6 @@ public class FlytFadGuiController {
         lvwFade.getItems().addAll(Controller.getFade());
         lvwLager.getItems().addAll(Controller.getLagere());
     }
+
 
 }
