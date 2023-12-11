@@ -447,10 +447,10 @@ public class MainGuiController {
     @FXML
     void opretPåfyldningAction(ActionEvent event) {
         try {
-            List<DestillatTilPåfyldning> destillat = lvwDestillaterTilPåfyldning.getSelectionModel().getSelectedItems();
+            List<DestillatTilPåfyldning> destillat = lvwDestillaterTilPåfyldning.getItems();
             Fad fad = lvwFadPå.getSelectionModel().getSelectedItem(); // måske ikke korrekt
             LocalDate startDato = LocalDate.parse(txfStartDatoPåfyld.getText());
-            String medarbejder = txfMedarbejder.getText();
+            String medarbejder = txfMedarbejderPå.getText();
             for (DestillatTilPåfyldning destillatTilPåfyldning : destillat){
                 if (startDato.isBefore(destillatTilPåfyldning.getDestillat().getSlutDato())){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
