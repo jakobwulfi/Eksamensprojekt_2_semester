@@ -2,10 +2,11 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Påfyldning implements Serializable {
-    private List<DestillatTilPåfyldning> destillater;
+    private List<DestillatTilPåfyldning> destillater = new ArrayList<>();
     private LocalDate startDato;
     private String medarbejder;
     private double alkoholProcentStart;

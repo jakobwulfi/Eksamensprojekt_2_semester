@@ -450,7 +450,7 @@ public class MainGuiController {
             List<DestillatTilPåfyldning> destillat = lvwDestillaterTilPåfyldning.getSelectionModel().getSelectedItems();
             Fad fad = lvwFadPå.getSelectionModel().getSelectedItem(); // måske ikke korrekt
             LocalDate startDato = LocalDate.parse(txfStartDatoPåfyld.getText());
-            String medarbejder = txfMedarbejder.getText();
+            String medarbejder = txfMedarbejderPå.getText();
             for (DestillatTilPåfyldning destillatTilPåfyldning : destillat){
                 if (startDato.isBefore(destillatTilPåfyldning.getDestillat().getSlutDato())){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
