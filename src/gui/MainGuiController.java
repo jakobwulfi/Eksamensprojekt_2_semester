@@ -513,8 +513,9 @@ public class MainGuiController {
     void tilføjFadTilLagerAction(ActionEvent event) { // skal laves fra lager til hylde
         Lager lager = lvwLagre.getSelectionModel().getSelectedItem();
         Fad fadTilLager = lvwFadeIkkePåLager.getSelectionModel().getSelectedItem();
-        boolean found = false;
-        for (Række række : lager.getRækker()){
+
+        //lævn fra da vi kun havde fad list view og lager listview på lager tab
+       /* for (Række række : lager.getRækker()){
             for (Hylde hylde : række.getHylder()){
                 if (!hylde.getFade().isEmpty()){
                     for (Fad fad : hylde.getFade()){
@@ -536,14 +537,13 @@ public class MainGuiController {
                             for (Fad fad : hylde.getFade()){
                                 if (fad.equals(fadTilLager)){
                                     hylde.removeFad(fad);
-                                    found = true;
                                 }
                             }
                         }
                     }
                 }
             }
-        }
+        }*/
 
 
 
