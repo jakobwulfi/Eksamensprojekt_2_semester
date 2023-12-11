@@ -12,7 +12,7 @@ public class Påfyldning implements Serializable {
     private double alkoholProcentNu;
 
     public Påfyldning(List<DestillatTilPåfyldning> destillater,  LocalDate startDato, String medarbejder) {
-        this.destillater = destillater;
+        this.destillater.addAll(destillater);
         this.startDato = startDato;
         this.medarbejder = medarbejder;
         beregnStartProcent();
