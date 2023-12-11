@@ -242,8 +242,6 @@ public abstract class Controller {
             try {
                 if (f.getPåfyldning().getStartDato().plusYears(3).isBefore(LocalDate.now())) {
                     TreAarGammel.add(f);
-                } else {
-                    System.out.println("Startdatoen er ikke ældre end 3 år.");
                 }
             } catch(NullPointerException ex){
 
