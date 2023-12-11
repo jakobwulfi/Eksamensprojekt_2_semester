@@ -4,20 +4,29 @@ import controller.Controller;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.*;
 
+import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class MainGuiController {
-
+    @FXML
+    private Button btnFlytFad;
     @FXML
     private ImageView imgSall;
 
@@ -841,6 +850,20 @@ public class MainGuiController {
             alert.setHeaderText("Du har ikke valgt et fad");
             alert.show();
         }
+
+    }
+
+
+    @FXML
+    void flytFadAction(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FlytFadGui.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setOpacity(1);
+        stage.setTitle("My New Stage Title");
+        stage.setScene(new Scene(root, 450, 450));
+        stage.showAndWait();
 
     }
 
