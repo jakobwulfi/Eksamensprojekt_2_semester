@@ -467,13 +467,22 @@ public class MainGuiController {
                 alert.setTitle("Indtastnings Fejl");
                 alert.setHeaderText("Indtast venlist en medarbejder");
                 alert.show();
+            }
+                if (lvwDestillaterTilPåfyldning.getItems().isEmpty()) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(guiStage.getScene().getWindow());
+                    alert.setTitle("Indtastnings Fejl");
+                    alert.setHeaderText("Destillat ikke valgt");
+                    alert.show();
             } else {
                 Påfyldning p = Controller.opretPåfyldning(destillat, fad, startDato, medarbejder);
                 if (p.getStartDato().plusYears(3).isBefore(LocalDate.now())){
                     lvwFadeWhisky.getItems().add(fad);
                     lvwDestillaterTilPåfyldning.getItems().clear();
+                    lvwDestillatPå.getItems().clear();
                 } else {
                     lvwDestillaterTilPåfyldning.getItems().clear();
+                    lvwDestillatPå.getItems().clear();
                 }
 
             }
