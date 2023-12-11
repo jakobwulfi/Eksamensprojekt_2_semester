@@ -721,7 +721,6 @@ public class MainGuiController {
             alert.setHeaderText("Du har ikke valgt en whisky");
             alert.show();
         }
-
     }
 
     @FXML
@@ -807,6 +806,19 @@ public class MainGuiController {
             }
         }
         lvwFadeLager.getItems().addAll(fadePåLager);
+
+        lvwFadeLager.setCellFactory(lvw -> new ListCell<Fad>() {
+            @Override
+            protected void updateItem(Fad fad, boolean empty) {
+                super.updateItem(fad, empty);
+                if (empty || fad == null) {
+                    setText(null);
+                } else {
+                    String text = fad.getFadNr() + " (" + Controller.findLokationPåFad(fad) + " )";
+                    setText(text);
+                }
+            }
+        });
     }
     //---------------------------------------------------------------------
 
