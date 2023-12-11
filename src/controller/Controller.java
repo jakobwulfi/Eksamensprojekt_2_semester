@@ -190,7 +190,8 @@ public abstract class Controller {
             fad.setPåfyldning(p);
             fad.updatenuværendeMængdeLiter(volumen);
             for (DestillatTilPåfyldning  destillat : destillater){
-                destillat.getDestillat().setMængdeLiter(destillat.getMængdeLiter() - destillat.getMængdeLiter());
+                Destillat d = destillat.getDestillat();
+                d.setMængdeLiter(d.getMængdeLiter() - destillat.getMængdeLiter());
             }
             return p;
         }
