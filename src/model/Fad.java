@@ -28,6 +28,8 @@ public class Fad implements Serializable{
     public void updatenuværendeMængdeLiter(double volumen) {
         if (volumen > fadStørrelse){
             throw new IllegalArgumentException("Mængde er større end fadet kan indeholde");
+        } else if (volumen < 0) {
+            throw new IllegalArgumentException("Ugyldig mængde");
         } else {
             this.NuværendeMængdeLiter = volumen;
         }

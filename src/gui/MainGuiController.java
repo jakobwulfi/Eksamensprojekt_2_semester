@@ -733,6 +733,12 @@ public class MainGuiController {
             alert.setTitle("Format Error");
             alert.setHeaderText("Indtast gyldig alkohol procent");
             alert.show();
+        } catch (NullPointerException ex){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(guiStage.getScene().getWindow());
+            alert.setTitle("Ingen påfyldning");
+            alert.setHeaderText("Der er ikke en påfyldning på dette fad");
+            alert.show();
         }
     }
 

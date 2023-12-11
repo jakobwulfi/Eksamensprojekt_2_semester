@@ -276,6 +276,10 @@ public abstract class Controller {
         //---------------------------------------------------------------------
 
     public static void  opdaterMængdeIFad(Fad fad, double mængde){
-        fad.updatenuværendeMængdeLiter(mængde);
+        if (fad.getPåfyldning() == null){
+            throw new IllegalArgumentException("Der er ikke en påfyldning på dette fad");
+        } else {
+            fad.updatenuværendeMængdeLiter(mængde);
+        }
     }
 }
