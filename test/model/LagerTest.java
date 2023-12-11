@@ -30,6 +30,8 @@ class LagerTest {
         assertEquals(forventetResultat, lager.getFade.size);
     }*/
 
+    //---------------------------------------------------------------------
+
     @Test
     void getMaxkapacitet() {
         Lager lager = new Lager("Blomstervej 2", "Lager 1");
