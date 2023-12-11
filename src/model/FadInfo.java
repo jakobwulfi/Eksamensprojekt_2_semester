@@ -1,6 +1,8 @@
 package model;
 
-public class FadInfo extends Fad {
+import java.io.Serializable;
+
+public class FadInfo extends Fad implements Serializable {
     Fad fad;
     String lokation;
     public FadInfo(Fad fad, String lokation) {

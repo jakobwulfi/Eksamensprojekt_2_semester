@@ -460,7 +460,7 @@ public class MainGuiController {
                 }
             }
 
-            if (medarbejder == null ||medarbejder.trim().isEmpty()) {
+            if (medarbejder == null /*||medarbejder.trim().isEmpty()*/) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.initOwner(guiStage.getScene().getWindow());
                 alert.setTitle("Indtastnings Fejl");
@@ -799,7 +799,6 @@ public class MainGuiController {
     void setFadePåLagerListe(Event e) {
         lvwFadeLager.getItems().clear();
         Lager l = lvwLagre.getSelectionModel().getSelectedItem();
-        List<Fad> fadePåLager = new ArrayList<>();
         for (Række r : l.getRækker()) {
             for (Hylde h : r.getHylder()) {
                 for (Fad f : h.getFade()) {

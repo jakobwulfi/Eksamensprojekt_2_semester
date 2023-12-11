@@ -14,7 +14,6 @@ public class Fad implements Serializable {
     private double fadStørrelse;
     private double NuværendeMængdeLiter = 0;
     private Påfyldning påfyldning;
-    public String lokation;
 
     public Fad(String fadFra, String fadType, int fadNr, double fadStørrelse) {
         this.fadFra = fadFra;
@@ -23,17 +22,7 @@ public class Fad implements Serializable {
         this.fadNr = fadNr;
         this.fadStørrelse = fadStørrelse;
     }
-    public Fad(String lokation, String fadFra, String fadType, int fillNr, int fadNr, double fadStørrelse) {
-        this.lokation = lokation;
-        this.fadFra = fadFra;
-        this.fadType = fadType;
-        this.fillNr = fillNr;
-        this.fadNr = fadNr;
-        this.fadStørrelse = fadStørrelse;
-    }
-
     public Fad() {
-
     }
 
     //---------------------------------------------------------------------
@@ -92,22 +81,12 @@ public class Fad implements Serializable {
         this.påfyldning = påfyldning;
     }
 
-    public String getLokation() {
-        return lokation;
-    }
     //---------------------------------------------------------------------
 
     @Override
     public String toString() {
-        return String.format("Fad nr: %d",fadNr);
-        // Fill nr: %d, \nFad type: %s"
-        //, fillNr, fadType)
-    }
-
-    public String toStringInfo() {
-        return String.format("Fad nr: %d %s",fadNr, lokation);
-        // Fill nr: %d, \nFad type: %s"
-        //, fillNr, fadType)
+        Double tilbage = fadStørrelse-NuværendeMængdeLiter;
+        return String.format("Fad nr: %d, Fill nr: %d\nVolumen tilbage: %.2f, \nFad type: %s",fadNr,fillNr, tilbage, fadType);
     }
 
     public String toStringLong(){

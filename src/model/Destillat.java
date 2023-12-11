@@ -102,8 +102,8 @@ public class Destillat implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("New make nr: %s. Alkohol procent: %.2f. \nKornsort: %s. \nMængde tilbage: %.2f"
-                ,newMakeNr,alkoholProcent,kornsort,mængdeLiter );
+        return String.format("New make nr: %s. Alkohol procent: %.2f. \nKornsort: %s. Slutdato: %s \nMængde tilbage: %.2f"
+                ,newMakeNr,alkoholProcent,kornsort, slutDato, mængdeLiter );
     }
 
     //---------------------------------------------------------------------
