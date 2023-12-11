@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -460,7 +461,7 @@ public class MainGuiController {
                 }
             }
 
-            if (medarbejder == null /*||medarbejder.trim().isEmpty()*/) {
+            if (medarbejder == null ||medarbejder.trim().isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.initOwner(guiStage.getScene().getWindow());
                 alert.setTitle("Indtastnings Fejl");
@@ -799,17 +800,28 @@ public class MainGuiController {
     void setFadePåLagerListe(Event e) {
         lvwFadeLager.getItems().clear();
         Lager l = lvwLagre.getSelectionModel().getSelectedItem();
+        List<Fad> fadePåLager = new ArrayList<>();
         for (Række r : l.getRækker()) {
             for (Hylde h : r.getHylder()) {
-                for (Fad f : h.getFade()) {
-                    lvwFadeLager.getItems().addAll( Controller.findLokationPåFad(f));
-                }
+                fadePåLager.addAll(h.getFade());
             }
         }
+        lvwFadeLager.getItems().addAll(fadePåLager);
+
+        lvwFadeLager.setCellFactory(lvw -> new ListCell<Fad>() {
+            @Override
+            protected void updateItem(Fad fad, boolean empty) {
+                super.updateItem(fad, empty);
+                if (empty || fad == null) {
+                    setText(null);
+                } else {
+                    String text = fad.getFadNr() + " (" + Controller.findLokationPåFad(fad) + " )";
+                    setText(text);
+                }
+            }
+        });
     }
     //---------------------------------------------------------------------
-
-
 
     @FXML
     void fadInfoAction(MouseEvent event) {
