@@ -309,14 +309,14 @@ public class MainGuiController {
     private TextField txfRækker;
 
     @FXML
-    private TextField txfSlutDato;
+    private DatePicker txfSlutDato;
 
 
     @FXML
-    private TextField txfStartDato;
+    private DatePicker txfStartDato;
 
     @FXML
-    private TextField txfStartDatoPåfyld;
+    private DatePicker txfStartDatoPåfyld;
 
     @FXML
     private TextField txfStartVolume;
@@ -331,8 +331,8 @@ public class MainGuiController {
         try {
             double alkoholProcent = Double.valueOf(txfAlkoholProcent.getText());
             double startVolume = Double.valueOf(txfStartVolume.getText());
-            LocalDate start = LocalDate.parse(txfStartDato.getText());
-            LocalDate slut = LocalDate.parse(txfSlutDato.getText());
+            LocalDate start = txfStartDato.getValue();
+            LocalDate slut = txfSlutDato.getValue();
 
             if (alkoholProcent > 100 || alkoholProcent < 0) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -348,9 +348,8 @@ public class MainGuiController {
                 alert.show();
             } else {
                 Destillat d = Controller.opretDestillat(txfMaltBatch.getText(), txfKornsort.getText(), txfMedarbejder.getText(),
-                        Double.valueOf(txfAlkoholProcent.getText()), txfRygeMateriale.getText(), txfKommentar.getText(),
-                        txfNewMakeNr.getText(), LocalDate.parse(txfStartDato.getText()), LocalDate.parse(txfSlutDato.getText()),
-                        Double.valueOf(txfStartVolume.getText()));
+                        alkoholProcent, txfRygeMateriale.getText(), txfKommentar.getText(),
+                        txfNewMakeNr.getText(), start, slut, startVolume);
                 lvwDestillater.getItems().add(d);
                 lvwDestillatPå.getItems().add(d);
                 txfMaltBatch.clear();
@@ -360,8 +359,6 @@ public class MainGuiController {
                 txfRygeMateriale.clear();
                 txfKommentar.clear();
                 txfNewMakeNr.clear();
-                txfStartDato.clear();
-                txfSlutDato.clear();
                 txfStartVolume.clear();
             }
         } catch (NumberFormatException e) {
@@ -463,7 +460,7 @@ public class MainGuiController {
         try {
             List<DestillatTilPåfyldning> destillat = lvwDestillaterTilPåfyldning.getItems();
             Fad fad = lvwFadPå.getSelectionModel().getSelectedItem(); // måske ikke korrekt
-            LocalDate startDato = LocalDate.parse(txfStartDatoPåfyld.getText());
+            LocalDate startDato = txfStartDatoPåfyld.getValue();
             String medarbejder = txfMedarbejderPå.getText();
 
             for (DestillatTilPåfyldning destillatTilPåfyldning : destillat) {
@@ -486,7 +483,11 @@ public class MainGuiController {
                 if (p.getStartDato().plusYears(3).isBefore(LocalDate.now())) {
                     lvwFadeWhisky.getItems().add(fad);
                     lvwDestillaterTilPåfyldning.getItems().clear();
-                    lvwDestillatPå.getItems().clear();
+                    for (int i = 0; i < lvwDestillatPå.getItems().size(); i++){
+                        if (lvwDestillatPå.getItems().get(i).getMængdeLiter() == 0){
+                            lvwDestillatPå.getItems().remove(lvwDestillatPå.getItems().get(i));
+                        }
+                    }
                 } else {
                     lvwDestillaterTilPåfyldning.getItems().clear();
                     lvwDestillatPå.getItems().clear();
@@ -667,6 +668,7 @@ public class MainGuiController {
 
         lvwFadeIkkePåLager.getItems().addAll(fade);
         lvwFadeWhisky.getItems().addAll(Controller.treAarGammel());
+        lvwFadeWhisky.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         lvwDestillater.getItems().addAll(Controller.getDestillater());
 
         for (Destillat destillat : Controller.getDestillater()) {

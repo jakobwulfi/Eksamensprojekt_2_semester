@@ -183,9 +183,15 @@ public abstract class Controller {
         for (DestillatTilPåfyldning destillatTilPåfyldning : destillater) {
             volumen += destillatTilPåfyldning.getMængdeLiter();
         }
+        for (DestillatTilPåfyldning destillatTilPåfyldning : destillater){
+            if (destillatTilPåfyldning.getDestillat().getSlutDato().isAfter(startDato)){
+                throw new IllegalArgumentException("Start dato er før destillatet er færdigt");
+            }
+        }
+
         if (volumen > fad.getFadStørrelse()) {
             throw new IllegalArgumentException("Påfyldning for stor til fad");
-        } else {
+        }  else {
             Påfyldning p = new Påfyldning(destillater, startDato, medarbejder);
             fad.setPåfyldning(p);
             fad.updatenuværendeMængdeLiter(volumen);

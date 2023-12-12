@@ -57,6 +57,6 @@ public class App {
         DestillatTilPåfyldning dtp = Controller.opretDestillatTilPåfyldning(d1, 120);
 
         // Påfyldning
-        Påfyldning p = Controller.opretPåfyldning(List.of(dtp), fad3, LocalDate.of(2020,01,01), "Snævar");
+        Påfyldning p = Controller.opretPåfyldning(List.of(dtp), fad3, LocalDate.of(2020,01,04), "Snævar");
     }
 }
