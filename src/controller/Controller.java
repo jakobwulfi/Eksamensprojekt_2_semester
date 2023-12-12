@@ -28,25 +28,6 @@ public abstract class Controller {
         return d;
     }
 
-    /**
-     * Update Destilat.
-     * Pre: startDato > slutdato
-     */
-    public static void updateDestillat(Destillat destillat, String maltBatch, String kornsort, String medarbejder, double mængdeLiter, double alkoholProcent,
-                                       String rygeMateriale, String kommentar, String newMakeNr, LocalDate startDato, LocalDate slutDato, double startVolume) {
-        destillat.setMaltBatch(maltBatch);
-        destillat.setKornsort(kornsort);
-        destillat.setMedarbejder(medarbejder);
-        destillat.setMængdeLiter(mængdeLiter);
-        destillat.setAlkoholProcent(alkoholProcent);
-        destillat.setRygeMateriale(rygeMateriale);
-        destillat.setKommentar(kommentar);
-        destillat.setNewMakeNr(newMakeNr);
-        destillat.setStartDato(startDato);
-        destillat.setSlutDato(slutDato);
-        destillat.setStartVolume(startVolume);
-    }
-
     public static List<Destillat> getDestillater() {
         return storage.getDestillater();
     }
@@ -55,7 +36,6 @@ public abstract class Controller {
 
     /**
      * Opret et nyt Fad
-     * Pre:
      */
     public static Fad opretFad(String fadFra, String fadType, int fadNr, double fadStørrelse) {
         Fad f = new Fad(fadFra, fadType, fadNr, fadStørrelse);
@@ -65,7 +45,6 @@ public abstract class Controller {
 
     /**
      * Update Fad.
-     * Pre:
      */
     public static void updateFad(Fad fad, String fadFra, String fadType, int fillNr, int fadNr, double fadStørrelse) {
         fad.setFadFra(fadFra);
@@ -75,6 +54,10 @@ public abstract class Controller {
         fad.setFadStørrelse(fadStørrelse);
     }
 
+    /**
+     * Returner fade gemt i Storage
+     * @return en List<Fad> fade
+     */
     public static List<Fad> getFade() {
         return storage.getFade();
     }
@@ -94,7 +77,6 @@ public abstract class Controller {
 
     /**
      * Update Lager.
-     * Pre:
      */
     public static void updateLager(Lager lager, String adresse, String navn) {
         lager.setAdresse(adresse);
@@ -110,7 +92,6 @@ public abstract class Controller {
 
     /**
      * Opret en ny Hylde
-     * Pre:
      */
     public static void opretHylde(int maxKapacitet, int antal, Række række) {
         for (int i = 0; i < antal; i++) {
@@ -119,6 +100,9 @@ public abstract class Controller {
         }
     }
 
+    /**
+     * Tilføjer et fad til en hylde på et lager
+     */
     public static void addFadTilHylde(Fad fad, int hylde, int række, Lager lager) {
         lager.getRækker().get(række - 1).getHylder().get(hylde - 1).addFad(fad);
 
@@ -127,7 +111,6 @@ public abstract class Controller {
 
     /**
      * Opret ny Række
-     * Pre:
      */
     public static List<Række> opretRække(Lager lager, int rækker, int hylder, int pladsHylde) {
         for (int i = 0; i < rækker; i++) {
@@ -157,25 +140,17 @@ public abstract class Controller {
         return w;
     }
 
-
     /**
-     * Update Whisky.
-     * Pre:
+     * Returnerer en liste af whiskyer gemt i Storage
+     * @return en List<Whisky> whiskies
      */
-    /*
-    public static void updateWhisky(Whisky whisky, String whiskyType, int nummer) {
-        whisky.setWhiskyType(whiskyType);
-    } */
-
     public static List<Whisky> getWhisker() {
         return storage.getWhiskyer();
     }
 
     //---------------------------------------------------------------------
-
     /**
      * Opret en nyt Påfyldning
-     * Pre:
      */
     public static Påfyldning opretPåfyldning(List<DestillatTilPåfyldning> destillater, Fad fad, LocalDate startDato,
                                              String medarbejder) {
@@ -256,31 +231,22 @@ public abstract class Controller {
         }
         return TreAarGammel;
     }
-
-
-        /**
-         * Update Påfyldning.
-         * Pre:
-         */
-    /*public static void updatePåfyldning(Påfyldning påfyldning, Destillat destillat, Fad fad, LocalDate startDato,
-                                        String medarbejder, double antalLiter, double alkoholProcent, LocalDate slutDato) {
-        //påfyldning.setFad(fad);
-        påfyldning.setStartDato(startDato);
-        påfyldning.setMedarbejder(medarbejder);
-        //påfyldning.setAntalLiter(antalLiter);
-        påfyldning.setAlkoholProcent(alkoholProcent);
-        påfyldning.setSlutDato(slutDato);
-    }*/
-
-
         //---------------------------------------------------------------------
 
+    /**
+     * Opdaterer alkoholprocenten på en Påfyldning
+     */
     public static void opdaterAlkoholProcent(double alkoholProcent, Påfyldning påfyldning){
         påfyldning.setAlkoholProcent(alkoholProcent);
     }
 
         //---------------------------------------------------------------------
 
+    /**
+     * Opdaterer den nuværendeMængdeLiter på et fad
+     * @param fad
+     * @param mængde
+     */
     public static void  opdaterMængdeIFad(Fad fad, double mængde){
         if (fad.getPåfyldning() == null){
             throw new IllegalArgumentException("Der er ikke en påfyldning på dette fad");
